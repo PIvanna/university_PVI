@@ -25,7 +25,7 @@ h2{
   margin-bottom: 50px;
   font-family: "Monomakh", Arial;
   font-size: 40px;
-  color: #8d2517;
+  color: #bc463a;
   line-height: 20px;
   letter-spacing: 2px;
 }
@@ -34,8 +34,8 @@ table {
   width: 100%;
   border-collapse: separate; 
   border-spacing: 0;
-  border: 4px solid #d4a59b;
-  border-radius: 20px;
+  border: 4px solid #5c2019;
+  border-radius: 10px;
   min-height: 200px;
 }
 
@@ -71,8 +71,8 @@ tr{
 }
 
 th{
-  border-right: 3px solid #d4a59b;
-  border-bottom: 3px solid #d4a59b;
+  border-right: 3px solid #5c2019;
+  border-bottom: 3px solid #5c2019;
   border-collapse: collapse;
   font-family: "Monomakh", Arial;
   font-size: 20px;
