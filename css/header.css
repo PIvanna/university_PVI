@@ -1,0 +1,60 @@
+header {
+  background-color: #5c2019;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 10vh;
+}
+
+h1 a {
+  text-decoration: none;
+  color: #f3e0dc;
+}
+
+h1 {
+  font-family: "Monomakh", Arial;
+  font-size: 25px;
+  color: #f3e0dc;
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+  height: 100%;
+  line-height: 10vh;
+  width: 11%;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.wrapper-header {
+  width: 30%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+}
+
+.profile {
+  width: 70%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  padding: 15px;
+}
+
+.username {
+  font-family: Arial;
+  font-size: 18px;
+  color: #f3e0dc;
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+  line-height: 14px;
+  letter-spacing: 1.5px;
+  margin-right: 15px;
+  text-align: center;
+}
