@@ -17,11 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (navItems.length > 0) {
       navItems.forEach((link) => {
-        if (link.getAttribute("href") === "./" + currentPath) {
-          link.classList.add("active");
-        } else {
-          link.classList.remove("active");
-        }
+        link.getAttribute("href") === "./" + currentPath
+          ? link.classList.add("active")
+          : link.classList.remove("active");
       });
     }
   });
@@ -31,7 +29,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function checkTh() {
   const checkbox = document.getElementById("checkbox1");
-  if (checkbox.checked) {
-    checkbox.checked = false;
-  }
+  if (checkbox.checked) checkbox.checked = false;
+}
+
+function openDropProfile() {
+  const drop_profile = document.getElementById("drop-profile");
+  drop_profile.style.display != "block"
+    ? (drop_profile.style.display = "block")
+    : (drop_profile.style.display = "none");
 }

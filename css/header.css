@@ -37,14 +37,7 @@ h1 {
   height: 40px;
 }
 
-.profile {
-  width: 70%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  padding: 15px;
-}
+
 
 .username {
   font-family: Arial;
@@ -57,4 +50,46 @@ h1 {
   letter-spacing: 1.5px;
   margin-right: 15px;
   text-align: center;
+}
+
+
+.profile {
+  width: 70%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  padding: 15px;
+  position: relative;
+  cursor: pointer;
+}
+
+#drop-profile{
+  position: absolute;
+  width: 60%;
+  height: 20vh;
+  left: 29%;
+  bottom: -20vh;
+  display: none;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  background-color: #5c2018;
+}
+
+.drop-profile-p{
+  height: 50%;
+  width: 100%;
+
+  font-family: Arial;
+  font-size: 14px;
+  text-decoration: none;
+  line-height: 10vh;
+  letter-spacing: 1.5px;
+  margin-right: 15px;
+  text-align: center;
+}
+
+.drop-profile-p a{
+  text-decoration: none;
+  color: #f3e0dc;
 }
