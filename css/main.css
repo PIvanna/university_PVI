@@ -268,9 +268,8 @@ h3 {
 #button-create,
 #button-save {
   width: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: block;
+ 
 }
 
 .buttons-table{
@@ -312,6 +311,6 @@ h3 {
 
 #edit_text,
 #add_text{
-  display: flex;
+  display: block;
 }
 

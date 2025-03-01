@@ -1,40 +1,60 @@
-function includeHTML(file, elementId) {
-  fetch(file)
-    .then((response) => response.text())
-    .then((data) => {
-      document.getElementById(elementId).innerHTML = data;
-    })
-    .catch((error) => console.error(`Error loading ${file}:`, error));
+const getElement = document.querySelector.bind(document);
+
+
+let addIS = false;
+let editIs = false;
+const select_group = getElement("#select-group");
+const f_name = getElement("#fname");
+const l_name = getElement("#lname");
+const select_gender = getElement("#select-gender");
+const input_date = getElement("#input-date");
+
+
+
+class Student {
+  static count = 2;
+
+  constructor(group, name, gender, birthday, status) {
+    this.id = Student.count++;
+    this.group = group;
+    this.name = name;
+    this.gender = gender;
+    this.birthday = birthday;
+    this.status = status;
+  }
+
+
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  includeHTML("components/header.html", "header-placeholder");
-  includeHTML("components/sidebar.html", "sidebar-placeholder");
+const students = [];
+let student = null;
 
-  let currentPath = window.location.pathname.split("/").pop();
-  const observer = new MutationObserver(() => {
-    const navItems = document.querySelectorAll(".nav-item");
 
-    if (navItems.length > 0) {
-      navItems.forEach((link) => {
-        link.getAttribute("href") === "./" + currentPath
-          ? link.classList.add("active")
-          : link.classList.remove("active");
-      });
-    }
-  });
 
-  observer.observe(document.body, { childList: true, subtree: true });
+document.addEventListener("DOMContentLoaded", function() {
+  loadPage();
 });
 
-function changeDisplay(elem) {
-  elem.style.display != "flex"
-    ? (elem.style.display = "flex")
-    : (elem.style.display = "none");
+function loadPage() {
+  const new_student = new Student(
+    "PZ-21",
+    "Ivanna Pavlyshyn",
+    "Female",
+    "07/07/2006",
+    "active"
+  );
+  students.push(new_student);
+  addRow(new_student);
 }
 
-function getElement(elem) {
-  return document.querySelector(`${elem}`);
+function changeDisplayFlex(elem) {
+  elem.style.display =
+    getComputedStyle(elem).display !== "flex" ? "flex" : "none";
+}
+
+function changeDisplayBlock(elem) {
+  elem.style.display =
+    getComputedStyle(elem).display !== "block" ? "block" : "none";
 }
 
 function checkTh() {
@@ -43,58 +63,53 @@ function checkTh() {
 }
 
 function openDropProfile() {
-  changeDisplay(getElement("#drop-profile"));
+  changeDisplayFlex(getElement("#drop-profile"));
 }
 
+
+
 function openAdd() {
-  const editTextElem = getElement("#edit_text");
-  const saveButElem = getElement("#button-save");
-  const addTextElem = getElement("#add_text");
-  const createButElem = getElement("#button-create");
+  addIS = true;
+  editIs = false;
+  openWind();
+}
 
-  if (window.getComputedStyle(editTextElem).display === "flex")
-    editTextElem.style.display = "none";
-  if (window.getComputedStyle(saveButElem).display === "flex")
-    saveButElem.style.display = "none";
-  if (window.getComputedStyle(addTextElem).display !== "flex")
-    editTextElem.style.display = "flex";
-  if (window.getComputedStyle(createButElem).display !== "flex")
-    saveButElem.style.display = "flex";
+function openWind() {
+  const elements = {
+    addText: getElement("#add_text"),
+    buttonCreate: getElement("#button-create"),
+    editText: getElement("#edit_text"),
+    buttonSave: getElement("#button-save"),
+    wrapperShadow: getElement("#wrapper-shadow"),
+    addStudent: getElement("#addStudent"),
+  };
 
-  changeDisplay(getElement("#wrapper-shadow"));
-  changeDisplay(getElement("#addStudent"));
+  if (addIS || editIs) {
+    const isAdd = addIS;
+
+    elements.addText.style.display = isAdd ? "block" : "none";
+    elements.buttonCreate.style.display = isAdd ? "block" : "none";
+    elements.editText.style.display = isAdd ? "none" : "block";
+    elements.buttonSave.style.display = isAdd ? "none" : "block";
+
+    addIS = false;
+    editIs = false;
+  }
+
+  changeDisplayFlex(elements.wrapperShadow);
+  changeDisplayFlex(elements.addStudent);
 }
 
 function closeAdd() {
-  changeDisplay(getElement("#wrapper-shadow"));
-  changeDisplay(getElement("#addStudent"));
+  changeDisplayFlex(getElement("#wrapper-shadow"));
+  changeDisplayFlex(getElement("#addStudent"));
 }
 
 function createElem(tag) {
   return document.createElement(`${tag}`);
 }
 
-let mode = "none";
 
-class Student {
-  static count = 2;
-
-  constructor(group, fname, lname, gender, birthday, status) {
-    this.id = Student.count++;
-    this.group = group;
-    this.fname = fname;
-    this.lname = lname;
-    this.gender = gender;
-    this.birthday = birthday;
-    this.status = status;
-  }
-
-  getInfo() {
-    return `${this.fname} ${this.lname}, Стать: ${this.gender}, Дата народження: ${this.birthday}, Статус: ${this.status}`;
-  }
-}
-
-const students = [];
 
 function addRow(new_student) {
   const main_tbody = getElement("#main-tbody");
@@ -113,6 +128,9 @@ function addRow(new_student) {
 
   elements.but_cont.className = "buttons-table";
   elements.circle_status.className = "status-circle";
+  if(new_student.status == "active"){
+    elements.circle_status.style.backgroundColor = "green";
+  }
 
   elements.img_edit.src = "./img/2202989.webp";
   elements.img_del.src = "./img/1214428.png";
@@ -136,8 +154,8 @@ function addRow(new_student) {
   new_tr.children[0].append(elements.input, elements.label);
   [
     new_student.group,
-    new_student.fname,
-    new_student.lname,
+    new_student.name,
+    new_student.gender,
     new_student.birthday,
   ].forEach((text, i) => (new_tr.children[i + 1].textContent = text));
   new_tr.children[5].append(elements.circle_status);
@@ -146,31 +164,30 @@ function addRow(new_student) {
   main_tbody.append(new_tr);
 }
 
-function checkForm() {
-  const select_group = getElement("#select-group");
-  const f_name = getElement("#fname");
-  const l_name = getElement("#lname");
-  const select_gender = getElement("#select-gender");
-  const input_date = getElement("#input-date");
-
-  if (
+function checkValidForm() {
+  return (
     select_group.value != "selected" &&
     f_name.value != "" &&
     l_name.value != "" &&
     select_gender.value != "selected" &&
     input_date.value != ""
-  ) {
+  );
+}
+
+function checkForm() {
+  if (checkValidForm()) {
     const new_student = new Student(
       select_group.value,
       f_name.value,
       l_name.value,
       select_gender.value,
-      input_date.value
+      input_date.value,
+      "disabled"
     );
     students.push(new_student);
     addRow(new_student);
-    changeDisplay(getElement("#wrapper-shadow"));
-    changeDisplay(getElement("#addStudent"));
+    changeDisplayFlex(getElement("#wrapper-shadow"));
+    changeDisplayFlex(getElement("#addStudent"));
   }
 }
 
@@ -194,7 +211,6 @@ function delStudent(event) {
   }
 }
 
-let student = null;
 
 function editStudent() {
   const clickedElem = event.target;
@@ -209,65 +225,46 @@ function editStudent() {
     );
     if (studentIndex !== -1) {
       student = students[studentIndex];
-      const select_group = getElement("#select-group");
-      const f_name = getElement("#fname");
-      const l_name = getElement("#lname");
-      const select_gender = getElement("#select-gender");
-      const input_date = getElement("#input-date");
       select_group.value = student.group;
       f_name.value = student.fname;
       l_name.value = student.lname;
       select_gender.value = student.gender;
       input_date.value = student.birthday;
-      openAdd();
-      const addTextElem = getElement("#add_text");
-      const createButElem = getElement("#button-create");
-      const editTextElem = getElement("#edit_text");
-      const saveButElem = getElement("#button-save");
 
-      if (window.getComputedStyle(addTextElem).display === "flex")
-        addTextElem.style.display = "none";
-      if (window.getComputedStyle(createButElem).display === "flex")
-        createButElem.style.display = "none";
-      if (window.getComputedStyle(editTextElem).display !== "flex")
-        editTextElem.style.display = "flex";
-      if (window.getComputedStyle(saveButElem).display !== "flex")
-        saveButElem.style.display = "flex";
+      addIS = false;
+      editIs = true;
+      openWind();
     }
   }
 }
 
 function saveForm() {
-  const select_group = getElement("#select-group");
-  const f_name = getElement("#fname");
-  const l_name = getElement("#lname");
-  const select_gender = getElement("#select-gender");
-  const input_date = getElement("#input-date");
-  if (
-    select_group.value != "selected" &&
-    f_name.value != "" &&
-    l_name.value != "" &&
-    select_gender.value != "selected" &&
-    input_date.value != ""
-  ) {
+  if (checkValidForm()) {
     student.group = select_group.value;
     student.fname = f_name.value;
     student.lname = l_name.value;
     student.gender = select_gender.value;
     student.birthday = input_date.value;
     editRow(student);
-    changeDisplay(getElement("#wrapper-shadow"));
-    changeDisplay(getElement("#addStudent"));
+    changeDisplayFlex(getElement("#wrapper-shadow"));
+    changeDisplayFlex(getElement("#addStudent"));
     student = null;
   }
 }
 
 function editRow(student) {
   const btnArray = Array.from(document.querySelectorAll("#button-del"));
-  const rowIndex = btnArray.findIndex((btn) => {
-    const row = btn.closest("tr");
-    return row.dataset.studentId == student.id;
-  });
 
-  console.log("Row Index:", rowIndex);
+  const rowIndex = btnArray.findIndex(
+    (btn) => btn.dataset.studentId == student.id
+  );
+
+  if (rowIndex !== -1) {
+    const row = btnArray[rowIndex].closest("tr");
+    [student.group, student.fname, student.lname, student.birthday].forEach(
+      (text, i) => (row.children[i + 1].textContent = text)
+    );
+  } else {
+    console.log("Student not found");
+  }
 }

@@ -33,34 +33,7 @@
               </tr>
             </thead>
             <tbody id="main-tbody">
-              <tr>
-                <td>
-                  <input
-                    onclick="checkTh()"
-                    type="checkbox"
-                    id="checkbox"
-                  /><label for="checkbox"></label>
-                </td>
-                <td>Group</td>
-                <td>Name</td>
-                <td>Gender</td>
-                <td>Birthday</td>
-                <td>
-                  <div class="status-circle"></div>
-                </td>
-                <td>
-                  <div class="buttons-table">
-                    <button id="button-edit" onclick="editStudent(event)">
-                      <img src="./img/2202989.webp" alt="edit">
-                    </button>
-                    
-                    <button id="button-del" onclick="delStudent(event)"> 
-                       <img src="img/1214428.png" alt="delete">
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            </thead>
+              
             </tbody>
           </table>
         </div>
@@ -108,7 +81,7 @@
         </form>
         <div class="line"></div>
         <div class="buttons">
-          <button id="button-ok">OK</button>
+          <button id="button-ok" onclick="closeAdd()">OK</button>
           <button id="button-create" type="submit" onclick="checkForm()">Create</button>
           <button id="button-save" type="submit" onclick="saveForm()">Save</button>
         </div>
@@ -116,4 +89,5 @@
     </div>
   </body>
   <script src="./js/main.js"></script>
+  <script src="./js/components.js"></script>
 </html>
