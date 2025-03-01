@@ -12,26 +12,108 @@
       <div id="sidebar-placeholder"></div>
       <main>
         <h2>Students</h2>
-        <table>
-          <thead>
-            <tr>
-              <th><input onclick="checkTh()" type="checkbox" id="checkbox1" /><label for="checkbox1"></label></th>
-              <th>Group</th>
-              <th>Name</th>
-              <th>Gender</th>
-              <th>Birthday</th>
-              <th>Status</th>
-              <th>Options</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td colspan="7">No data</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="wrapper-table">
+          <div id="button-add" onclick="openAdd()">+</div>
+          <table>
+            <thead>
+              <tr>
+                <th>
+                  <input
+                    onclick="checkTh()"
+                    type="checkbox"
+                    id="checkbox1"
+                  /><label for="checkbox1"></label>
+                </th>
+                <th>Group</th>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Birthday</th>
+                <th>Status</th>
+                <th>Options</th>
+              </tr>
+            </thead>
+            <tbody id="main-tbody">
+              <tr>
+                <td>
+                  <input
+                    onclick="checkTh()"
+                    type="checkbox"
+                    id="checkbox"
+                  /><label for="checkbox"></label>
+                </td>
+                <td>Group</td>
+                <td>Name</td>
+                <td>Gender</td>
+                <td>Birthday</td>
+                <td>
+                  <div class="status-circle"></div>
+                </td>
+                <td>
+                  <div class="buttons-table">
+                    <button id="button-edit" onclick="editStudent(event)">
+                      <img src="./img/2202989.webp" alt="edit">
+                    </button>
+                    
+                    <button id="button-del" onclick="delStudent(event)"> 
+                       <img src="img/1214428.png" alt="delete">
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </thead>
+            </tbody>
+          </table>
+        </div>
       </main>
     </div>
-    <script src="./js/main.js"></script>
+    <div id="wrapper-shadow">
+      <div id="addStudent">
+        <div id="button-close" onclick="closeAdd()">+</div>
+        <h3 id="add_text">Add student</h3>
+        <h3 id="edit_text">Edit student</h3>
+        <div class="line"></div>
+        <form id="form-add">
+          <fieldset id="fieldset-add">
+            <div class="form-item">
+              <label for="select-group">Group</label>
+              <select name="group" id="select-group">
+                <option value="selected" >Select group</option>
+                <option value="PZ-21">PZ-21</option>
+                <option value="PZ-22">PZ-22</option>
+                <option value="PZ-23">PZ-23</option>
+                <option value="PZ-24">PZ-24</option>
+              </select>
+            </div>
+            <div class="form-item">
+              <label for="fname">First name</label>
+              <input type="text" id="fname" name="fname" />
+            </div>
+            <div class="form-item">
+              <label for="lname">Last name</label>
+              <input type="text" id="lname" name="lname" />
+            </div>
+            <div class="form-item">
+              <label for="select-gender">Gender</label>
+              <select name="group" id="select-gender">
+                <option value="selected" >Select gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+            </div>
+            <div class="form-item">
+              <label for="input-date">Birthday</label>
+              <input id="input-date" type="date" />
+            </div>
+          </fieldset>
+        </form>
+        <div class="line"></div>
+        <div class="buttons">
+          <button id="button-ok">OK</button>
+          <button id="button-create" type="submit" onclick="checkForm()">Create</button>
+          <button id="button-save" type="submit" onclick="saveForm()">Save</button>
+        </div>
+      </div>
+    </div>
   </body>
+  <script src="./js/main.js"></script>
 </html>

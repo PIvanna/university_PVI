@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Monomakh&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Monomakh&display=swap");
 @import url("./header.css");
 @import url("./sidebar.css");
 
@@ -8,20 +8,16 @@
   padding: 0;
 }
 
-
-
-
-
-.main-wrapper{
+.main-wrapper {
   display: flex;
 }
 
-main{
+main {
   margin: 60px;
   width: 70vw;
 }
 
-h2{
+h2 {
   margin-bottom: 50px;
   font-family: "Monomakh", Arial;
   font-size: 40px;
@@ -32,45 +28,43 @@ h2{
 
 table {
   width: 100%;
-  border-collapse: separate; 
+  border-collapse: separate;
   border-spacing: 0;
   border: 4px solid #5c2019;
   border-radius: 10px;
-  min-height: 200px;
+  min-height: 220px;
 }
 
 th:nth-child(1),
 th:nth-child(4),
-th:nth-child(6)
-{
+th:nth-child(6) {
   width: 10%;
 }
 
-th:nth-child(2){
+th:nth-child(2) {
   width: 12.5%;
 }
 
-th:nth-child(3){
+th:nth-child(3) {
   width: 25%;
 }
 
-th:nth-child(5)
-{
+th:nth-child(5) {
   width: 15%;
 }
 
-
-
-thead{
+thead {
   width: 100%;
-  height: 80px;
+  height: 100px;
 }
 
-tr{
+tr {
   width: 100%;
+  height: 100px;
 }
 
-th{
+th,
+td {
   border-right: 3px solid #5c2019;
   border-bottom: 3px solid #5c2019;
   border-collapse: collapse;
@@ -80,40 +74,41 @@ th{
   line-height: 20px;
   height: 40px;
   letter-spacing: 2px;
-
+  text-align: center;
 }
 
-th:nth-child(7){
+th:nth-child(7) {
   border-right: none;
   width: 15%;
 }
 
-
-th input[type="checkbox"] {
+th input[type="checkbox"],
+td input[type="checkbox"] {
   width: 0;
   height: 0;
-  visibility: hidden; 
+  visibility: hidden;
 }
 
-
-th input[type="checkbox"] + label {
+th input[type="checkbox"] + label,
+td input[type="checkbox"] + label{
   width: 30px;
-  height: 30px; 
-  border: 3px solid #bc463a; 
+  height: 30px;
+  border: 3px solid #bc463a;
   display: inline-block;
-  border-radius: 5px; 
+  border-radius: 5px;
   position: relative;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
-th input[type="checkbox"]:checked + label {
-  background-color: #FFFFFF; 
+th input[type="checkbox"]:checked + label,
+td input[type="checkbox"]:checked + label {
+  background-color: #ffffff;
 }
 
-/* Стилі для при натисканні */
-th input[type="checkbox"]:checked + label::before {
-  content: "✔"; 
+th input[type="checkbox"]:checked + label::before,
+td input[type="checkbox"]:checked + label::before {
+  content: "✔";
   position: absolute;
   top: 50%;
   left: 50%;
@@ -121,3 +116,202 @@ th input[type="checkbox"]:checked + label::before {
   font-size: 20px;
   color: #bc463a;
 }
+
+#button-add {
+  width: 50px;
+  height: 50px;
+  border: 3px solid #4286f5;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  font-family: "Monomakh", Arial;
+  font-size: 40px;
+  line-height: 43px;
+  text-align: center;
+  color: #5c2019;
+  align-self: flex-end;
+  cursor: pointer;
+}
+
+.wrapper-table {
+  width: 100%;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+}
+
+#wrapper-shadow {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #0000005c;
+  z-index: 1;
+  display: none;
+}
+
+#addStudent {
+  width: 40%;
+  height: 70%;
+  background-color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+  display: none;
+  border-radius: 10px;
+  flex-direction: column;
+}
+
+#button-close {
+  width: 70px;
+  height: 70px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  font-family: "Monomakh", Arial;
+  font-size: 50px;
+  line-height: 43px;
+  text-align: center;
+  color: #5c2019;
+  align-self: flex-end;
+  transform: rotate(45deg);
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+}
+
+h3 {
+  margin: 50px 20px 20px;
+  font-family: "Monomakh", Arial;
+  font-size: 20px;
+  color: #bc463a;
+  line-height: 20px;
+  letter-spacing: 1px;
+}
+
+.line {
+  width: 100%;
+  height: 3px;
+  background-color: #5c2019;
+  margin-bottom: 20px;
+}
+
+#form-add {
+  width: 80%;
+  height: 50%;
+  margin: 0 auto 20px;
+  padding: 0;
+}
+
+#fieldset-add {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border: none;
+}
+
+.form-item {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.form-item label {
+  font-family: "Monomakh", Arial;
+  font-size: 18px;
+  color: #bc463a;
+  line-height: 20px;
+  letter-spacing: 1px;
+  width: 30%;
+}
+
+.form-item select, 
+.form-item input {
+  width: 65%; 
+  height: 30px;
+  border: 2px solid #5c2019;
+  border-radius: 5px;
+  padding-left: 20px;
+  font-size: 14px;
+  color: #5c2019
+  ;
+  line-height: 20px;
+  letter-spacing: 1px;
+}
+
+.buttons{
+  width: 20%;
+  height: 50px;
+  align-self: flex-end;
+  margin-right: 40px;
+  display: flex;
+  justify-content: space-between;
+}
+
+#button-ok,
+#button-create,
+#button-save {
+  width: 40%;
+  height: 50%;
+  background-color: transparent;
+  border: 2px solid #5c2019;
+  border-radius: 5px;
+  color: #5c2019;
+  text-align: center;
+}
+
+#button-create,
+#button-save {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttons-table{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  padding: 0 10px;
+}
+
+#button-edit,
+#button-del{
+  width: 45px;
+  height: 45px;
+  background-color: transparent;
+  border: 2px solid #5c2019;
+  border-radius: 5px;
+  position: relative;
+}
+
+#button-edit img,
+#button-del img{
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+.status-circle{
+  width: 30px;
+  height: 30px;
+  background-color: darkgray;
+  border-radius: 50%;
+  margin: auto;
+}
+
+#edit_text,
+#add_text{
+  display: flex;
+}
+
