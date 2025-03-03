@@ -10,6 +10,9 @@
 
 .main-wrapper {
   display: flex;
+  width: 70%;
+  margin:auto;
+  padding-top: 10vh;
 }
 
 main {
@@ -18,7 +21,7 @@ main {
 }
 
 h2 {
-  margin-bottom: 50px;
+  margin-bottom: 30px;
   font-family: "Monomakh", Arial;
   font-size: 40px;
   color: #bc463a;
@@ -32,7 +35,7 @@ table {
   border-spacing: 0;
   border: 4px solid #5c2019;
   border-radius: 10px;
-  min-height: 220px;
+  min-height: 200px;
 }
 
 th:nth-child(1),
@@ -55,18 +58,20 @@ th:nth-child(5) {
 
 thead {
   width: 100%;
-  height: 100px;
+  height: 80px;
 }
+
+
 
 tr {
   width: 100%;
-  height: 100px;
+  height: 80px;
 }
 
 th,
 td {
   border-right: 3px solid #5c2019;
-  border-bottom: 3px solid #5c2019;
+  border-bottom: 4px solid #5c2019;
   border-collapse: collapse;
   font-family: "Monomakh", Arial;
   font-size: 20px;
@@ -142,7 +147,7 @@ td input[type="checkbox"]:checked + label::before {
 #wrapper-shadow {
   width: 100vw;
   height: 100vh;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   background-color: #0000005c;
@@ -238,8 +243,7 @@ h3 {
   border-radius: 5px;
   padding-left: 20px;
   font-size: 14px;
-  color: #5c2019
-  ;
+  color: #5c2019;
   line-height: 20px;
   letter-spacing: 1px;
 }
@@ -314,3 +318,6 @@ h3 {
   display: block;
 }
 
+td:nth-child(7){
+  border-right: none;
+}

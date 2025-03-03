@@ -34,8 +34,11 @@
 
 aside {
   width: 250px;
-  height: 90vh;
+  height: 100vh;
   background-color: #d4a59a;
+  position: fixed;
+  padding-top: 10vh;
+
 }
 
 nav {

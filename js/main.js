@@ -178,8 +178,7 @@ function checkForm() {
   if (checkValidForm()) {
     const new_student = new Student(
       select_group.value,
-      f_name.value,
-      l_name.value,
+      f_name.value +  l_name.value,
       select_gender.value,
       input_date.value,
       "disabled"
@@ -267,4 +266,18 @@ function editRow(student) {
   } else {
     console.log("Student not found");
   }
+}
+
+function bell(){
+  document.getElementById('bell').animate([
+    { transform: 'rotate(0deg)' },
+    { transform: 'rotate(15deg)' },
+    { transform: 'rotate(-15deg)' },
+    { transform: 'rotate(10deg)' },
+    { transform: 'rotate(-10deg)' },
+    { transform: 'rotate(0deg)', offset: 0.5 }
+  ], {
+    duration: 1500,
+    iterations: 1
+  });
 }

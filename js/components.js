@@ -1,5 +1,4 @@
 
-
 function includeHTML(file, elementId) {
   fetch(file)
     .then((response) => response.text())
