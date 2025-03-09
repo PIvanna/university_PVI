@@ -1,17 +1,60 @@
 <header>
-    <h1><a href="./index.html">CMS</a></h1>
-    <div class="wrapper-header">
-      <div class="notif">
-        <img id="bell" onclick="bell()" src="../img/appointment-reminders.png" alt="">
-      </div>
-      <div class="profile" onclick="openDropProfile()">
-        <img src="./img/avatar-default-icon-2048x2048-h6w375ur.png" alt="Foto" class="avatar" />
-        <p class="username">Ivanna Pavlyshyn</p>
-        <div id="drop-profile">
-          <p class="drop-profile-p"><a href="#">Profile</a></p>
-          <p class="drop-profile-p"><a href="#">Log out</a></p>
-        </div>
+  <h1><a href="./index.html">CMS</a></h1>
+  <div class="wrapper-header">
+    <div class="notif">
+      <!-- <a href="../message.html"> -->
+        <img
+          id="bell"
+          ondblclick="bell()"
+          onclick="hideNotif(event)"
+
+          src="../img/appointment-reminders.png">
+        <!-- /> --> 
+      </a>
+      <div id="sign-not"></div>
+    </div>
+    <div class="profile" >
+      <img src="./img/gender-neutral-user.png" alt="Foto" class="avatar" />
+      <p class="username">Ivanna Pavlyshyn</p>
+      <div id="drop-profile">
+        <p class="drop-profile-p"><a href="#">Profile</a></p>
+        <p class="drop-profile-p"><a href="#">Log out</a></p>
       </div>
     </div>
-  </header>
-  
+    <div id="message-wraper">
+      <div class="message-elem">
+        <div class="message-profile">
+          <img
+            src="../img/gender-neutral-user.png"
+            alt=""
+            class="message-avatar"
+          />
+          <p class="message-author">John. K.</p>
+        </div>
+        <div class="message-item"></div>
+      </div>
+      <div class="message-elem">
+        <div class="message-profile">
+          <img
+            src="../img/gender-neutral-user.png"
+            alt=""
+            class="message-avatar"
+          />
+          <p class="message-author">John. K.</p>
+        </div>
+        <div class="message-item"></div>
+      </div>
+      <div class="message-elem">
+        <div class="message-profile">
+          <img
+            src="../img/gender-neutral-user.png"
+            alt=""
+            class="message-avatar"
+          />
+          <p class="message-author">John. K.</p>
+        </div>
+        <div class="message-item"></div>
+      </div>
+    </div>
+  </div>
+</header>

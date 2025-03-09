@@ -13,7 +13,12 @@
       <main>
         <h2>Students</h2>
         <div class="wrapper-table">
-          <div id="button-add" onclick="openAdd()">+</div>
+          <div id="but-table-all">
+            <div id="button-del-all" onclick="delAll()">
+              <img src="./img/1214428.png" alt="" />
+            </div>
+            <div id="button-add" onclick="openAdd()">+</div>
+          </div>
           <table>
             <thead>
               <tr>
@@ -32,9 +37,7 @@
                 <th>Options</th>
               </tr>
             </thead>
-            <tbody id="main-tbody">
-              
-            </tbody>
+            <tbody id="main-tbody"></tbody>
           </table>
         </div>
       </main>
@@ -50,7 +53,7 @@
             <div class="form-item">
               <label for="select-group">Group</label>
               <select name="group" id="select-group">
-                <option value="selected" >Select group</option>
+                <option value="selected">Select group</option>
                 <option value="PZ-21">PZ-21</option>
                 <option value="PZ-22">PZ-22</option>
                 <option value="PZ-23">PZ-23</option>
@@ -68,7 +71,7 @@
             <div class="form-item">
               <label for="select-gender">Gender</label>
               <select name="group" id="select-gender">
-                <option value="selected" >Select gender</option>
+                <option value="selected">Select gender</option>
                 <option value="male">Male</option>
                 <option value="female">Female</option>
               </select>
@@ -81,9 +84,28 @@
         </form>
         <div class="line"></div>
         <div class="buttons">
-          <button id="button-ok" onclick="closeAdd()">OK</button>
-          <button id="button-create" type="submit" onclick="checkForm()">Create</button>
-          <button id="button-save" type="submit" onclick="saveForm()">Save</button>
+          <button id="button-ok" onclick="okClick()">OK</button>
+          <button id="button-create" type="submit" onclick="checkForm()">
+            Create
+          </button>
+          <button id="button-save" type="submit" onclick="saveForm()">
+            Save
+          </button>
+        </div>
+      </div>
+      <div id="delete-wraper">
+        <div id="button-close" onclick="closeDel()">+</div>
+        <h3>Warnings</h3>
+        <div class="line"></div>
+        <p id="war_text">
+          Are you sure you want to delete user Ivanna Pavlyshyn
+        </p>
+        <div class="line"></div>
+        <div class="buttons">
+          <button id="button-cancel" onclick="closeDel()">Cancel</button>
+          <button id="button-ok-del" type="submit" onclick="delStudent()">
+            OK
+          </button>
         </div>
       </div>
     </div>
