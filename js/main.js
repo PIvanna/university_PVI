@@ -388,3 +388,11 @@ function bell() {
 function okClick() {
   checkValidForm() ? checkForm() : closeAdd();
 }
+
+function burgerMenu() {
+  const burger_menu = getElement("#burger-menu");
+  const aside_elem = getElement("aside");
+  console.log(aside_elem);
+  console.log(burger_menu);
+  changeDisplayBlock(aside_elem);
+}
