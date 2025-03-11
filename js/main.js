@@ -40,7 +40,7 @@ function loadPage() {
     "PZ-21",
     "Ivanna Pavlyshyn",
     "female",
-    "07-07-2006",
+    "2006-07-07",
     "Online"
   );
   students.push(new_student);
@@ -231,7 +231,7 @@ function addRow(new_student) {
   elements.but_cont.className = "buttons-table";
   elements.circle_status.className = "status-circle";
   if (new_student.status == "Online") {
-    elements.circle_status.style.backgroundColor = "green";
+    elements.circle_status.style.backgroundColor = "#4286f5";
   }
 
   elements.img_edit.src = "./img/2202989.webp";
@@ -440,12 +440,15 @@ function okClick() {
 }
 
 function burgerMenu() {
-  const burger_menu = getElement("#burger-menu");
-  const aside_elem = getElement("aside");
-  console.log(aside_elem);
-  console.log(burger_menu);
-  changeDisplayBlock(aside_elem);
+  const aside_elem = document.querySelector("aside");
+
+  if (aside_elem.classList.contains("open")) {
+    aside_elem.classList.remove("open");
+  } else {
+    aside_elem.classList.add("open");
+  }
 }
+
 
 function closeInfo() {
   changeDisplayFlex(getElement("#wrapper-shadow"));

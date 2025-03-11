@@ -209,7 +209,6 @@ td input[type="checkbox"]:checked + label::before {
   line-height: 43px;
   text-align: center;
   color: #5c2019;
-  /* align-self: flex-end; */
   transform: rotate(45deg);
   position: absolute;
   right: 0;
@@ -383,8 +382,9 @@ td:nth-child(7) {
 .pagination {
   display: flex;
   margin: auto;
-  width: 400px;
+  width: 100%;
   margin-top: 30px;
+  justify-content: center
 }
 
 
@@ -763,5 +763,21 @@ tr:last-child td{
 
   .info-cap {
     font-size: 16px;
+  }
+
+  .pagination a{
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    padding: 0;
+    text-align: center;
+    font-size: 16px;
+  }
+}
+
+
+@media screen and (max-width: 350px) {
+  .pagination{
+    width: 110%;
   }
 }
