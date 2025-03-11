@@ -147,7 +147,6 @@ function butAvai(elem) {
     ? buts.forEach((but) => {
         but.disabled = false;
         but.style.backgroundColor = "transparent";
-
       })
     : buts.forEach((but) => {
         but.disabled = true;
@@ -390,6 +389,10 @@ function editRow(student) {
   );
 
   if (rowIndex !== -1) {
+    students[rowIndex].group = student.group;
+    students[rowIndex].name = student.fname + " " + student.lname;
+    students[rowIndex].gender = student.gender;
+    students[rowIndex].birthday = student.birthday;
     const row = btnArray[rowIndex].closest("tr");
     [
       student.group,
