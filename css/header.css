@@ -277,10 +277,16 @@ h1 {
     width: 160px;
   }
 
-  .notif {
-    width: 10%;
-    margin-right: 0;
+  .bell{
+    width: 35px;
+    height: 35px;
   }
+
+  .notif{
+    width: 10%;
+  }
+
+
 
   #message-wraper {
     height: 280px;

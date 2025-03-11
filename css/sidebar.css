@@ -38,6 +38,7 @@ aside {
   background-color: #d4a59a;
   position: fixed;
   padding-top: 100px;
+  z-index: 2;
 }
 
 nav {
@@ -62,7 +63,7 @@ nav {
 
 
 
-@media screen and (max-width: 960px) {
+@media screen and (max-width: 1250px) {
   aside {
     display: none;
   }
