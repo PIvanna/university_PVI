@@ -3,21 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A site to manage and interact with the online student list">
     <title>Students</title>
-    <link rel="stylesheet" href="./css/main.css" />
+    <link rel="stylesheet" href="./css/main.css"  />
+    <link rel="stylesheet" href="./css/table.css">
   </head>
   <body>
     <div id="header-placeholder"></div>
     <div id="sidebar-placeholder"></div>
     <div class="main-wrapper">
       <main>
-        <h2>Students</h2>
+        <h2 class="font-Monomakh">Students</h2>
         <div class="wrapper-table">
           <div id="but-table-all">
-            <div id="button-del-all" onclick="delAll()">
-              <img src="./img/1214428.png" alt="" />
-            </div>
-            <div id="button-add" onclick="openAdd()">+</div>
+            <button id="button-del-all" class="font-Monomakh main-buttons" onclick="delAll()">
+              <img src="./img/1214428.png" alt="delete" />
+            </button>
+            <button id="button-add" class="font-Monomakh main-buttons" onclick="openAdd()">+</button>
           </div>
           <table>
             <thead>
@@ -27,7 +29,7 @@
                     onclick="checkTh()"
                     type="checkbox"
                     id="checkbox1"
-                  /><label for="checkbox1"></label>
+                  /><label style="font-size: 0;" for="checkbox1">hi</label>
                 </th>
                 <th>Group</th>
                 <th>Name</th>
@@ -52,12 +54,13 @@
     </div>
     <div id="wrapper-shadow">
       <div id="addStudent">
-        <div class="button-close" onclick="closeAdd()">+</div>
+        <button class="button-close" onclick="closeAdd()">+</button>
         <h3 id="add_text">Add student</h3>
         <h3 id="edit_text">Edit student</h3>
         <div class="line"></div>
         <form id="form-add">
-          <fieldset id="fieldset-add">
+          <fieldset id="fieldset-add" >
+            <legend style="font-size: 0;">hi</legend>
             <div class="form-item">
               <label for="input-date">Birthday</label>
               <input id="input-date" type="date" />
@@ -92,33 +95,33 @@
         </form>
         <div class="line"></div>
         <div class="buttons">
-          <button id="button-ok" onclick="okClick()">OK</button>
-          <button id="button-create" type="submit" onclick="checkForm()">
+          <button id="button-ok" class="buttons-func-small" onclick="okClick()">OK</button>
+          <button id="button-create" class="buttons-func-small" type="submit" onclick="checkForm()">
             Create
           </button>
-          <button id="button-save" type="submit" onclick="saveForm()">
+          <button id="button-save" class="buttons-func-small" type="submit" onclick="saveForm()">
             Save
           </button>
         </div>
       </div>
       <div id="delete-wraper">
-        <div class="button-close" onclick="closeDel()">+</div>
+        <button class="button-close" onclick="closeDel()">+</button>
         <h3>Warnings</h3>
         <div class="line"></div>
-        <p id="war_text">
+        <p id="war_text" class="font-Monomakh">
           Are you sure you want to delete user Ivanna Pavlyshyn
         </p>
         <div class="line"></div>
         <div class="buttons">
-          <button id="button-cancel" onclick="closeDel()">Cancel</button>
-          <button id="button-ok-del" type="submit" onclick="delStudent()">
+          <button id="button-cancel" class="buttons-func-small" onclick="closeDel()">Cancel</button>
+          <button id="button-ok-del" class="buttons-func-small" type="submit" onclick="delStudent()">
             OK
           </button>
         </div>
       </div>
       <div id="info-student-wraper">
-        <div class="button-close" onclick="closeInfo()">+</div>
-        <h4>Information about student</h4>
+        <button class="button-close" onclick="closeInfo()">+</button>
+        <h4 class="font-Monomakh">Information about student</h4>
         <p class="info-student-p" id="group-det"></p>
         <p class="info-student-p" id="username-det"></p>
         <p class="info-student-p" id="gender-det"></p>
@@ -126,7 +129,8 @@
         <p class="info-student-p" id="status-det"></p>
       </div>
     </div>
+    <script src="./js/main.js"></script>
+    <script src="./js/components.js"></script>
   </body>
-  <script src="./js/main.js"></script>
-  <script src="./js/components.js"></script>
+ 
 </html>

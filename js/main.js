@@ -139,17 +139,21 @@ function createElem(tag) {
 function butAvai(elem) {
   let parentTd = elem.parentElement.parentElement.children[6];
 
-  console.log(document.querySelectorAll('input[type="checkbox"]'));
   let but_edit = parentTd.querySelector("#button-edit");
   let but_del = parentTd.querySelector("#button-del");
   const buts = [but_del, but_edit];
 
   elem.checked
-    ? buts.forEach((but) => (but.disabled = false))
+    ? buts.forEach((but) => {
+        but.disabled = false;
+        but.style.backgroundColor = "transparent";
+
+      })
     : buts.forEach((but) => {
         but.disabled = true;
         getElement("#checkbox1").checked = false;
         getElement("#button-del-all").style.display = "none";
+        but.style.backgroundColor = "rgb(222 222 222 / 55%)";
       });
 
   if (elem.checked) {
@@ -236,9 +240,13 @@ function addRow(new_student) {
 
   elements.img_edit.src = "./img/2202989.webp";
   elements.img_del.src = "./img/1214428.png";
+  elements.img_edit.alt = "edit";
+  elements.img_del.alt = "delete";
   elements.edit_but.id = "button-edit";
   elements.del_but.id = "button-del";
   elements.input.id = elements.label.htmlFor = `checkbox${new_student.id}`;
+  elements.label.innerHTML = "hi";
+  elements.label.style.fontSize = "0";
   elements.input.type = "checkbox";
   elements.input.checked = true;
   elements.input.onclick = function (event) {
@@ -254,6 +262,7 @@ function addRow(new_student) {
   elements.edit_but.dataset.studentId = new_student.id;
   elements.del_but.onclick = openDelOne;
   elements.edit_but.onclick = editStudent;
+
   new_tr.onclick = openInfo;
   for (let i = 0; i < 7; i++) new_tr.append(createElem("td"));
 
@@ -335,10 +344,8 @@ function delStudent() {
 
 function editStudent() {
   const clickedElem = event.target;
-  console.log(clickedElem);
   if (clickedElem.id === "button-edit") {
     const studentId = clickedElem.dataset.studentId;
-    console.log(studentId);
     event.stopPropagation();
 
     const studentIndex = students.findIndex(
@@ -384,9 +391,12 @@ function editRow(student) {
 
   if (rowIndex !== -1) {
     const row = btnArray[rowIndex].closest("tr");
-    [student.group, student.fname, student.lname, student.birthday].forEach(
-      (text, i) => (row.children[i + 1].textContent = text)
-    );
+    [
+      student.group,
+      student.fname + " " + student.lname,
+      student.gender,
+      student.birthday,
+    ].forEach((text, i) => (row.children[i + 1].textContent = text));
   } else {
     console.log("Student not found");
   }
@@ -397,15 +407,14 @@ document.addEventListener("DOMContentLoaded", function () {
     let notif = document.getElementById("sign-not");
     if (notif) {
       observer.disconnect();
-      if (localStorage.getItem("notifHidden") === "true") {
+      if (localStorage.getItem("notifHidden") === "true")
         notif.style.display = "none";
-      }
     }
   });
   observer.observe(document.body, { childList: true, subtree: true });
 });
 
-function hideNotif(event) {
+function hideNotif() {
   let notif = getElement("#sign-not");
   if (notif) {
     notif.style.display = "none";
@@ -436,19 +445,12 @@ function bell() {
 }
 
 function okClick() {
-  checkValidForm() ? checkForm() : closeAdd();
+  addIS ? (checkValidForm() ? checkForm() : closeAdd()) : closeAdd();
 }
 
 function burgerMenu() {
-  const aside_elem = document.querySelector("aside");
-
-  if (aside_elem.classList.contains("open")) {
-    aside_elem.classList.remove("open");
-  } else {
-    aside_elem.classList.add("open");
-  }
+  document.querySelector("aside").classList.toggle("open");
 }
-
 
 function closeInfo() {
   changeDisplayFlex(getElement("#wrapper-shadow"));
@@ -456,34 +458,25 @@ function closeInfo() {
 }
 
 function openInfo(event) {
-  console.log(event.target);
-  if (window.innerWidth < 850 && event.target.id != "button-del") {
-    changeDisplayFlex(getElement("#wrapper-shadow"));
-    changeDisplayFlex(getElement("#info-student-wraper"));
-    console.log(event);
-
-    const index = students.findIndex(
-      (student) => student.id == event.currentTarget.dataset.studentId
-    );
-
-    const elements = {
-      group_det: getElement("#group-det"),
-      username_det: getElement("#username-det"),
-      gender_det: getElement("#gender-det"),
-      birthday_det: getElement("#birthday-det"),
-      status_det: getElement("#status-det"),
-    };
-
-    console.log(students[index].group);
-    elements.group_det.innerHTML =
-      `<span class = "info-cap">Group: </span>` + students[index].group;
-    elements.username_det.innerHTML =
-      `<span class = "info-cap">Name: </span>` + students[index].name;
-    elements.gender_det.innerHTML =
-      `<span class = "info-cap">Gender: </span>` + students[index].gender;
-    elements.birthday_det.innerHTML =
-      `<span class = "info-cap">Birthday: </span>` + students[index].birthday;
-    elements.status_det.innerHTML =
-      `<span class = "info-cap">Status: </span>` + students[index].status;
+  const { target, currentTarget } = event;
+  const studentId = currentTarget.dataset.studentId;
+  if (window.innerWidth >= 850 || target.id === "button-del") {
+    return;
   }
+  const student = students.find((student) => student.id == studentId);
+  if (!student) return;
+  const elements = {
+    group_det: getElement("#group-det"),
+    username_det: getElement("#username-det"),
+    gender_det: getElement("#gender-det"),
+    birthday_det: getElement("#birthday-det"),
+    status_det: getElement("#status-det"),
+  };
+  changeDisplayFlex(getElement("#wrapper-shadow"));
+  changeDisplayFlex(getElement("#info-student-wraper"));
+  elements.group_det.innerHTML = `<span class="info-cap">Group: </span>${student.group}`;
+  elements.username_det.innerHTML = `<span class="info-cap">Name: </span>${student.name}`;
+  elements.gender_det.innerHTML = `<span class="info-cap">Gender: </span>${student.gender}`;
+  elements.birthday_det.innerHTML = `<span class="info-cap">Birthday: </span>${student.birthday}`;
+  elements.status_det.innerHTML = `<span class="info-cap">Status: </span>${student.status}`;
 }

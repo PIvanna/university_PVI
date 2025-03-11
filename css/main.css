@@ -1,12 +1,37 @@
-@import url("https://fonts.googleapis.com/css2?family=Monomakh&display=swap");
-@import url("./header.css");
-@import url("./sidebar.css");
+@font-face {
+  font-family: 'Monomakh'; 
+  src: url('../fonts/Monomakh-Regular.ttf') format('truetype');
+  font-weight: normal; 
+  font-style: normal; 
+}
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
+
+.display_flex_r_sb {
+  display: flex;
+  justify-content: space-between;
+}
+.display_flex_r_sa {
+  display: flex;
+  justify-content: space-between;
+}
+.display_flex_c {
+  display: flex;
+  flex-direction: column;
+}
+.font-Monomakh {
+  font-family: "Monomakh", Arial;
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+  text-align: center;
+}
+
+
 
 .main-wrapper {
   display: flex;
@@ -16,112 +41,20 @@
   justify-content: end;
   padding-right: 100px;
 }
-
 main {
   margin: 60px;
   width: 80%;
 }
-
 h2 {
   margin-bottom: 30px;
-  font-family: "Monomakh", Arial;
   font-size: 40px;
+  text-align: left !important; 
   color: #bc463a;
   line-height: 20px;
   letter-spacing: 2px;
 }
 
-table {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-  border: 4px solid #5c2019;
-  border-radius: 10px;
-  min-height: 200px;
-}
 
-th:nth-child(1),
-th:nth-child(4),
-th:nth-child(6) {
-  width: 10%;
-}
-
-th:nth-child(2) {
-  width: 12.5%;
-}
-
-th:nth-child(3) {
-  width: 25%;
-}
-
-th:nth-child(5) {
-  width: 15%;
-}
-
-thead {
-  width: 100%;
-  height: 80px;
-}
-
-tr {
-  width: 100%;
-  height: 80px;
-}
-
-th,
-td {
-  border-right: 3px solid #5c2019;
-  border-bottom: 4px solid #5c2019;
-  border-collapse: collapse;
-  font-family: "Monomakh", Arial;
-  font-size: 20px;
-  color: #bc463a;
-  line-height: 30px;
-  height: 40px;
-  letter-spacing: 2px;
-  text-align: center;
-  padding: 0 5px;
-}
-
-th:nth-child(7) {
-  border-right: none;
-  width: 15%;
-}
-
-th input[type="checkbox"],
-td input[type="checkbox"] {
-  width: 0;
-  height: 0;
-  visibility: hidden;
-}
-
-th input[type="checkbox"] + label,
-td input[type="checkbox"] + label {
-  width: 30px;
-  height: 30px;
-  border: 3px solid #bc463a;
-  display: inline-block;
-  border-radius: 5px;
-  position: relative;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-th input[type="checkbox"]:checked + label,
-td input[type="checkbox"]:checked + label {
-  background-color: #ffffff;
-}
-
-th input[type="checkbox"]:checked + label::before,
-td input[type="checkbox"]:checked + label::before {
-  content: "✔";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 20px;
-  color: #bc463a;
-}
 
 #but-table-all {
   width: 100%;
@@ -129,17 +62,14 @@ td input[type="checkbox"]:checked + label::before {
   justify-content: flex-end;
 }
 
-#button-add,
-#button-del-all {
+.main-buttons {
   width: 50px;
   height: 50px;
   border: 3px solid #4286f5;
   border-radius: 5px;
   margin-bottom: 15px;
-  font-family: "Monomakh", Arial;
   font-size: 40px;
   line-height: 43px;
-  text-align: center;
   color: #5c2019;
   align-self: flex-end;
   cursor: pointer;
@@ -147,11 +77,12 @@ td input[type="checkbox"]:checked + label::before {
   justify-content: center;
   align-items: center;
   margin-left: 20px;
+  background-color: transparent;
+}
 
-  img {
-    width: 30px;
-    height: 30px;
-  }
+.main-buttons img {
+  width: 30px;
+  height: 30px;
 }
 
 #button-del-all {
@@ -213,6 +144,8 @@ td input[type="checkbox"]:checked + label::before {
   position: absolute;
   right: 0;
   cursor: pointer;
+  border: none;
+  background-color: transparent;
 }
 
 h3 {
@@ -225,9 +158,7 @@ h3 {
 }
 
 #war_text {
-  font-family: "Monomakh", Arial;
   font-size: 30px;
-  text-align: center;
   margin: auto;
   width: 90%;
   min-height: 20%;
@@ -295,11 +226,11 @@ h3 {
   justify-content: space-between;
 }
 
-#button-ok,
-#button-create,
-#button-save,
-#button-cancel,
-#button-ok-del {
+
+
+
+
+.buttons-func-small {
   width: 40%;
   height: 50%;
   background-color: transparent;
@@ -317,63 +248,14 @@ h3 {
   display: block;
 }
 
-.buttons-table {
-  width: 100%;
-  display: flex;
-  justify-content: space-around;
-  padding: 0 10px;
-}
 
-#button-edit,
-#button-del {
-  width: 45px;
-  height: 45px;
-  background-color: transparent;
-  border: 2px solid #5c2019;
-  border-radius: 5px;
-  position: relative;
-}
-
-#button-del {
-  margin-left: 5px;
-}
-
-#button-edit img,
-#button-del img {
-  width: 30px;
-  height: 30px;
-  position: absolute;
-  z-index: -1;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  display: block;
-}
-
-#button-edit:hover img,
-#button-del:hover img {
-  width: 38px;
-  height: 38px;
-}
-
-.status-circle {
-  width: 30px;
-  height: 30px;
-  background-color: darkgray;
-  border-radius: 50%;
-  margin: auto;
-}
 
 #edit_text,
 #add_text {
   display: block;
 }
 
-td:nth-child(7) {
-  border-right: none;
-}
+
 
 #info-student-wraper {
   display: none;
@@ -402,16 +284,14 @@ td:nth-child(7) {
 }
 
 .pagination a.active {
-  background-color: #4286f5;
-  color: white;
-  border: 1px solid #4286f5;
+  background-color: transparent;
+  color: #5c2019;
+  border: 2px solid #4286f5;
 }
 
 .pagination a:hover:not(.active) {background-color: #ddd;}
 
-tr:last-child td{
-  border-bottom: none;
-}
+
 
 @media screen and (max-width: 1800px) {
   main {
@@ -450,11 +330,7 @@ tr:last-child td{
     width: 20%;
     height: 50px;
   }
-  #button-ok,
-  #button-create,
-  #button-save,
-  #button-cancel,
-  #button-ok-del {
+  .buttons-func-small {
     font-size: 14px;
   }
 }
@@ -485,29 +361,6 @@ tr:last-child td{
   
   main {
     width: 85%;
-  }
-
-  td {
-    font-size: 18px;
-    letter-spacing: 1px;
-  }
-
-  #button-edit,
-  #button-del {
-    width: 40px;
-    height: 40px;
-  }
-
-  #button-edit img,
-  #button-del img {
-    width: 25px;
-    height: 25px;
-  }
-
-  #button-edit:hover img,
-  #button-del:hover img {
-    width: 30px;
-    height: 30px;
   }
 }
 
@@ -546,9 +399,7 @@ tr:last-child td{
   }
 
   h4 {
-    font-family: "Monomakh", Arial;
     font-size: 24px;
-    font-weight: normal;
     letter-spacing: 1px;
     color: #5c2019;
     height: 40px;
@@ -577,141 +428,64 @@ tr:last-child td{
     font-size: 24px;
     color: #5c2019;
   }
-
-  th:nth-child(4),
-  td:nth-child(4),
-  th:nth-child(6),
-  td:nth-child(6) {
-    display: none;
-  }
-
-  th:nth-child(1) {
-    width: 10%;
-  }
-
-  th:nth-child(2) {
-    width: 10%;
-  }
-
-  th:nth-child(3) {
-    width: 40%;
-  }
-
-  th:nth-child(5) {
-    width: 20%;
-  }
-
-  th:nth-child(7) {
-    width: 20%;
-  }
 }
 
 @media screen and (max-width: 650px) {
+  h2 {
+    font-size: 35px;
+  }
   th:nth-child(2),
   td:nth-child(2) {
     display: none;
   }
-
   #addStudent,
   #delete-wraper {
     width: 400px;
   }
-
   h3 {
     font-size: 18px;
   }
-
   .form-item label {
     font-size: 16px;
     width: 35%;
   }
-
   .form-item select,
   .form-item input {
     height: 30px;
     font-size: 14px;
     width: 60%;
   }
-
   .buttons {
     width: 30%;
     height: 50px;
   }
-
-  #button-ok,
-  #button-create,
-  #button-save,
-  #button-cancel,
-  #button-ok-del {
+  .buttons-func-small {
     font-size: 14px;
   }
-
   .button-close {
     font-size: 40px;
   }
-
   #info-student-wraper {
     width: 350px;
     height: 300px;
   }
-
   h4 {
     font-size: 18px;
     height: 30px;
   }
-
   .info-student-p {
     font-size: 14px;
     margin: 10px 20px;
   }
-
   .info-cap {
     font-size: 16px;
-  }
-  th:nth-child(1) {
-    width: 10%;
-  }
-
-  th:nth-child(3) {
-    width: 40%;
-  }
-
-  th:nth-child(5) {
-    width: 20%;
-  }
-
-  th:nth-child(7) {
-    width: 20%;
   }
 }
 
 @media screen and (max-width: 550px) {
-  th:nth-child(5),
-  td:nth-child(5) {
-    display: none;
-  }
 
-  th:nth-child(1) {
-    width: 20%;
-  }
-
-  th:nth-child(3) {
-    width: 50%;
-  }
-  th:nth-child(7) {
-    width: 30%;
-  }
-
-  #addStudent,
-  #delete-wraper {
-    top: 63%;
-  }
-
-  th,
-  td {
-    font-size: 18px;
-  }
 }
+
 
 @media screen and (max-width: 450px) {
   #addStudent,
@@ -721,33 +495,26 @@ tr:last-child td{
 }
 
 @media screen and (max-width: 400px) {
-  #info-student-wraper {
-    width: 300px;
-    height: 300px;
-  }
-
-  #addStudent,
+  #info-student-wraper, 
+  #addStudent, 
   #delete-wraper {
-    width: 300px;
+    width: 100%; 
+    max-width: 300px; 
   }
-
   h3 {
     font-size: 16px;
   }
-
   .form-item label {
     font-size: 14px;
     width: 38%;
     line-height: 30px;
   }
-
-  .form-item select,
+  .form-item select, 
   .form-item input {
     height: 30px;
     font-size: 14px;
     width: 60%;
   }
-
   .button-close {
     font-size: 35px;
   }
@@ -755,23 +522,20 @@ tr:last-child td{
     font-size: 17px;
     height: 30px;
   }
-
   .info-student-p {
     font-size: 14px;
     margin: 10px 20px;
   }
-
   .info-cap {
     font-size: 16px;
   }
-
-  .pagination a{
+  .pagination a {
     width: 35px;
     height: 35px;
     line-height: 35px;
-    padding: 0;
-    text-align: center;
     font-size: 16px;
+    text-align: center;
+    padding: 0;
   }
 }
 

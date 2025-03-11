@@ -1,14 +1,40 @@
-<div id="burger-menu" onclick="burgerMenu()">
-  <div class="line-burger"></div>
-  <div class="line-burger"></div>
-  <div class="line-burger"></div>
-</div>
-<aside>
-  <nav>
-    <ul class="nav-list">
-      <li><a class="nav-item" href="./dashboard.html">Dashboard</a></li>
-      <li><a class="nav-item" href="./index.html">Students</a></li>
-      <li><a class="nav-item" href="./tasks.html">Tasks</a></li>
-    </ul>
-  </nav>
-</aside>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/sidebar.css" />
+  </head>
+  <body>
+    <div
+      id="burger-menu"
+      tabindex="0"
+      onclick="burgerMenu()"
+      onfocus="this.style.outline='none'"
+      onkeydown="handleBurgerKeyDown(event)"
+    >
+      <div class="line-burger"></div>
+      <div class="line-burger"></div>
+      <div class="line-burger"></div>
+    </div>
+
+    <aside class="display_flex_c">
+      <nav>
+        <ul class="nav-list display_flex_c">
+          <li>
+            <a class="nav-item font-Monomakh" href="./dashboard.html"
+              >Dashboard</a
+            >
+          </li>
+          <li>
+            <a class="nav-item font-Monomakh" href="./index.html">Students</a>
+          </li>
+          <li>
+            <a class="nav-item font-Monomakh" href="./tasks.html">Tasks</a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+  </body>
+</html>

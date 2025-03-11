@@ -1,16 +1,24 @@
-.nav-item {
-  position: relative;
+
+.display_flex_c {
+  display: flex;
+  flex-direction: column;
+}
+.font-Monomakh {
   font-family: "Monomakh", Arial;
-  font-size: 20px;
-  color: #333333;
   font-weight: normal;
   font-style: normal;
+  text-decoration: none;
+  text-align: center;
+}
+.nav-item {
+  position:relative;
+  font-size: 20px;
+  color: #333333;
   line-height: 20px;
   height: 40px;
   padding-bottom: 2px;
-  text-decoration: none;
+  text-align: left;
 }
-
 .nav-item::before {
   content: "";
   position: absolute;
@@ -21,17 +29,16 @@
   background-color: #ffffff;
   transition: width 0.4s ease;
 }
-
 .nav-item:hover::before {
   width: 100%;
 }
-
 .active {
-  color: #ffffff;
+  color: #142e54;
+  font-size: 20px;
   font-family: "Monomakh", Arial;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
+  font-weight: bold;
 }
-
 aside {
   width: 250px;
   height: 100vh;
@@ -39,39 +46,29 @@ aside {
   position: fixed;
   padding-top: 100px;
   z-index: 2;
-  display: flex;
-  flex-direction: column;
-
   transition: width 0.3s ease, opacity 0.3s ease, visibility 0.3s ease,
     padding 0.3s ease;
 }
-
 aside.open {
   width: 250px;
   opacity: 1;
   visibility: visible;
 }
-
 nav {
   width: 80%;
   margin: 0 auto;
   height: 200px;
 }
-
 .nav-list {
-  width: 100%;
+  width: 100%; 
   list-style-type: none;
   height: 200px;
-  display: flex;
-  flex-direction: column;
   justify-content: space-between;
   padding: 30px 0;
 }
-
 #burger-menu {
   display: none;
 }
-
 @media screen and (max-width: 1250px) {
   aside {
     width: 0px;
@@ -79,9 +76,9 @@ nav {
     visibility: hidden;
     overflow: hidden;
   }
-
   #burger-menu {
     display: flex;
+    flex-direction: column;
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -89,16 +86,14 @@ nav {
     position: relative;
     top: 120px;
     left: 15px;
-    flex-direction: column;
     justify-content: space-around;
     align-items: center;
     padding: 10px 0;
     z-index: 3;
   }
-
   .line-burger {
     width: 30px;
     height: 3px;
-    background-color: #5c2019;
+    background-color: black;
   }
 }
