@@ -34,8 +34,11 @@
 
 aside {
   width: 250px;
-  height: 90vh;
+  height: 100vh;
   background-color: #d4a59a;
+  position: fixed;
+  padding-top: 100px;
+  z-index: 2;
 }
 
 nav {
@@ -52,4 +55,38 @@ nav {
   flex-direction: column;
   justify-content: space-between;
   padding: 30px 0;
+}
+
+#burger-menu {
+  display: none;
+}
+
+
+
+@media screen and (max-width: 1250px) {
+  aside {
+    display: none;
+  }
+
+  #burger-menu {
+    display: flex;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #d4a59a;
+    position: relative;
+    top: 120px;
+    left: 15px;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 0;
+    z-index: 3;
+  }
+
+  .line-burger{
+    width: 30px;
+    height: 3px;
+    background-color: #5c2019;
+  }
 }

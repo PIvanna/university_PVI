@@ -3,7 +3,10 @@ header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  height: 10vh;
+  height: 100px;
+  position: absolute;
+  z-index: 3;
+  width: 100%;
 }
 
 h1 a {
@@ -19,17 +22,19 @@ h1 {
   font-style: normal;
   text-decoration: none;
   height: 100%;
-  line-height: 10vh;
-  width: 11%;
+  line-height: 100px;
+  width: 50px;
   text-align: center;
   letter-spacing: 1px;
+  margin-left: 20px;
 }
 
 .wrapper-header {
-  width: 30%;
+  width: 400px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  position: relative;
 }
 
 .avatar {
@@ -37,24 +42,22 @@ h1 {
   height: 40px;
 }
 
-
-
 .username {
-  font-family: Arial;
+  font-family: "Monomakh", Arial;
   font-size: 18px;
   color: #f3e0dc;
   font-weight: normal;
   font-style: normal;
   text-decoration: none;
-  line-height: 14px;
+  line-height: 28px;
   letter-spacing: 1.5px;
   margin-right: 15px;
   text-align: center;
+  width: 70%;
 }
 
-
 .profile {
-  width: 70%;
+  width: 80%;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -64,12 +67,15 @@ h1 {
   cursor: pointer;
 }
 
-#drop-profile{
+.profile:hover #drop-profile {
+  display: flex;
+}
+
+#drop-profile {
   position: absolute;
-  width: 60%;
-  height: 20vh;
-  left: 29%;
-  bottom: -20vh;
+  width: 320px;
+  height: 150px;
+  bottom: -149px;
   display: none;
   border-bottom-right-radius: 20px;
   border-bottom-left-radius: 20px;
@@ -77,21 +83,217 @@ h1 {
   flex-direction: column;
 }
 
-.drop-profile-p{
+.drop-profile-p {
   height: 50%;
   width: 100%;
 
-  font-family: Arial;
+  font-family: "Monomakh", Arial;
   font-size: 14px;
   text-decoration: none;
-  line-height: 10vh;
+  line-height: 75px;
   letter-spacing: 1.5px;
   margin-right: 15px;
   text-align: center;
 }
 
-.drop-profile-p a{
+.drop-profile-p a {
   text-decoration: none;
   color: #f3e0dc;
 }
 
+.notif {
+  width: 15%;
+  height: 100%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  position: relative;
+  margin-right: 20px;
+}
+
+.notif img {
+  display: block;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  z-index: 2;
+}
+
+#sign-not {
+  width: 10px;
+  height: 10px;
+  background-color: #4286f5;
+  border-radius: 50%;
+  top: 10px;
+  right: 0;
+  position: absolute;
+  display: block;
+}
+
+.notif:hover #message-wraper {
+  display: flex;
+}
+
+#message-wraper {
+  width: 400px;
+  height: 300px;
+  background-color: #d4a59a;
+  position: absolute;
+  top: 100px;
+  left: 0;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px 0;
+  align-items: center;
+}
+
+.message-elem {
+  width: 360px;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.message-avatar {
+  display: block;
+  width: 35px;
+  height: 35px;
+  border: none;
+  border-radius: 50%;
+  z-index: 2;
+  margin-bottom: 5px;
+}
+
+.messahe-author {
+  font-family: "Monomakh", Arial;
+  text-align: center;
+}
+
+.message-item {
+  position: relative;
+  border-radius: 10px;
+  padding: 20px;
+  width: 75%;
+  height: 50px;
+  margin-left: 15px;
+  background-color: #5c2018;
+}
+
+/* Arrow on the left */
+.message-item::before {
+  content: "";
+  position: absolute;
+  left: -10px;
+  top: 20px;
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-right: 10px solid #5c2018;
+}
+
+/* Inner triangle to match the background */
+.message-item::after {
+  content: "";
+  position: absolute;
+  left: -9px;
+  top: 20px;
+  width: 0;
+  height: 0;
+  border-top: 9px solid transparent;
+  border-bottom: 9px solid transparent;
+  border-right: 9px solid #5c2018;
+}
+
+.message-profile {
+  width: 60px;
+  height: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: Arial;
+  font-size: 16px;
+  color: #000000;
+}
+
+
+
+@media screen and (max-width: 760px) {
+  .wrapper-header {
+    width: 320px;
+  }
+
+  #drop-profile {
+    width: 252px;
+  }
+
+  #message-wraper {
+    height: 280px;
+    width: 320px;
+  }
+
+  .message-elem{
+    width: 288px;
+  }
+
+
+  .username {
+    font-size: 16px;
+    width: 71%;
+    margin-left: 5px;
+  }
+}
+
+@media screen and (max-width: 460px) {
+  .wrapper-header {
+    width: 280px;
+  }
+
+  #drop-profile {
+    width: 219px;
+  }
+
+  #message-wraper {
+    height: 280px;
+    width: 280px;
+  }
+
+  .message-elem{
+    width: 252px;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .wrapper-header {
+    width: 200px;
+  }
+
+  #drop-profile {
+    width: 160px;
+  }
+
+  .bell{
+    width: 35px;
+    height: 35px;
+  }
+
+  .notif{
+    width: 10%;
+  }
+
+
+
+  #message-wraper {
+    height: 280px;
+    width: 200px;
+  }
+
+  .message-elem{
+    width: 180px;
+  }
+}

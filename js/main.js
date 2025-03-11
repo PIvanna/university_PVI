@@ -1,6 +1,5 @@
 const getElement = document.querySelector.bind(document);
 
-
 let addIS = false;
 let editIs = false;
 const select_group = getElement("#select-group");
@@ -9,7 +8,8 @@ const l_name = getElement("#lname");
 const select_gender = getElement("#select-gender");
 const input_date = getElement("#input-date");
 
-
+let clickedElemToDel = null;
+let all = false;
 
 class Student {
   static count = 2;
@@ -22,26 +22,26 @@ class Student {
     this.birthday = birthday;
     this.status = status;
   }
-
-
 }
 
 const students = [];
 let student = null;
 
-
-
-document.addEventListener("DOMContentLoaded", function() {
-  loadPage();
+document.addEventListener("DOMContentLoaded", function () {
+  if (
+    window.location.pathname.split("/").pop() == "index.html" ||
+    window.location.pathname.split("/").pop() == ""
+  )
+    loadPage();
 });
 
 function loadPage() {
   const new_student = new Student(
     "PZ-21",
     "Ivanna Pavlyshyn",
-    "Female",
-    "07/07/2006",
-    "active"
+    "female",
+    "07-07-2006",
+    "Online"
   );
   students.push(new_student);
   addRow(new_student);
@@ -56,17 +56,6 @@ function changeDisplayBlock(elem) {
   elem.style.display =
     getComputedStyle(elem).display !== "block" ? "block" : "none";
 }
-
-function checkTh() {
-  const checkbox = getElement("#checkbox1");
-  if (checkbox.checked) checkbox.checked = false;
-}
-
-function openDropProfile() {
-  changeDisplayFlex(getElement("#drop-profile"));
-}
-
-
 
 function openAdd() {
   addIS = true;
@@ -100,16 +89,129 @@ function openWind() {
   changeDisplayFlex(elements.addStudent);
 }
 
+function resetForm() {
+  select_group.value = "selected";
+  f_name.value = "";
+  l_name.value = "";
+  select_gender.value = "selected";
+  input_date.value = "";
+}
+
 function closeAdd() {
   changeDisplayFlex(getElement("#wrapper-shadow"));
   changeDisplayFlex(getElement("#addStudent"));
+  resetForm();
+}
+
+function closeDel() {
+  changeDisplayFlex(getElement("#wrapper-shadow"));
+  changeDisplayFlex(getElement("#delete-wraper"));
+  clickedElemToDel = null;
+  if (all) {
+    getElement("#button-del-all").style.display = "none";
+  }
+  all = false;
+}
+
+function openDelOne() {
+  openDel();
+  all = false;
+  clickedElemToDel = event.target;
+  const studentId = clickedElemToDel.dataset.studentId;
+
+  const studentIndex = students.findIndex((student) => student.id == studentId);
+  if (studentIndex !== -1) {
+    getElement(
+      "#war_text"
+    ).textContent = `Are you sure you want to delete user ${students[studentIndex].name}`;
+  }
+}
+
+function openDel() {
+  changeDisplayFlex(getElement("#wrapper-shadow"));
+  changeDisplayFlex(getElement("#delete-wraper"));
 }
 
 function createElem(tag) {
   return document.createElement(`${tag}`);
 }
 
+function butAvai(elem) {
+  let parentTd = elem.parentElement.parentElement.children[6];
 
+  console.log(document.querySelectorAll('input[type="checkbox"]'));
+  let but_edit = parentTd.querySelector("#button-edit");
+  let but_del = parentTd.querySelector("#button-del");
+  const buts = [but_del, but_edit];
+
+  elem.checked
+    ? buts.forEach((but) => (but.disabled = false))
+    : buts.forEach((but) => {
+        but.disabled = true;
+        getElement("#checkbox1").checked = false;
+        getElement("#button-del-all").style.display = "none";
+      });
+
+  if (elem.checked) {
+    console.log("hi");
+    elem.checked
+      ? Array.from(document.querySelectorAll('input[type="checkbox"]'))
+          .splice(1)
+          .forEach((but) => {
+            if (but.checked) {
+              getElement("#checkbox1").checked = true;
+              getElement("#button-del-all").style.display = "flex";
+            }
+          })
+      : null;
+  }
+}
+
+function checkTh() {
+  const elem = event.target;
+  if (elem.id == "checkbox1") {
+    elem.checked
+      ? Array.from(document.querySelectorAll('input[type="checkbox"]'))
+          .splice(1)
+          .forEach((but) => {
+            but.checked = true;
+            butAvai(but);
+            getElement("#button-del-all").style.display = "flex";
+          })
+      : Array.from(document.querySelectorAll('input[type="checkbox"]'))
+          .splice(1)
+          .forEach((but) => {
+            but.checked = false;
+            butAvai(but);
+            getElement("#button-del-all").style.display = "none";
+          });
+  }
+}
+
+function delAll() {
+  all = true;
+  openDel();
+  getElement(
+    "#war_text"
+  ).textContent = `Are you sure you want to delete all users`;
+}
+
+function checkBox() {
+  let checkedAll = true;
+
+  Array.from(document.querySelectorAll('input[type="checkbox"]'))
+    .splice(1)
+    .forEach((but) => {
+      if (!but.checked) {
+        checkedAll = false;
+        console.log(checkedAll);
+      }
+    });
+  if (checkedAll) {
+    getElement("#button-del-all").style.display = "flex";
+    getElement(`input[type="checkbox"`).checked = true;
+  }
+}
 
 function addRow(new_student) {
   const main_tbody = getElement("#main-tbody");
@@ -128,7 +230,7 @@ function addRow(new_student) {
 
   elements.but_cont.className = "buttons-table";
   elements.circle_status.className = "status-circle";
-  if(new_student.status == "active"){
+  if (new_student.status == "Online") {
     elements.circle_status.style.backgroundColor = "green";
   }
 
@@ -138,17 +240,21 @@ function addRow(new_student) {
   elements.del_but.id = "button-del";
   elements.input.id = elements.label.htmlFor = `checkbox${new_student.id}`;
   elements.input.type = "checkbox";
-  elements.input.onclick = checkTh;
+  elements.input.checked = true;
+  elements.input.onclick = function (event) {
+    butAvai(event.target);
+  };
 
   elements.edit_but.append(elements.img_edit);
   elements.del_but.append(elements.img_del);
   elements.but_cont.append(elements.edit_but, elements.del_but);
 
   elements.del_but.dataset.studentId = new_student.id;
+  new_tr.dataset.studentId = new_student.id;
   elements.edit_but.dataset.studentId = new_student.id;
-  elements.del_but.onclick = delStudent;
+  elements.del_but.onclick = openDelOne;
   elements.edit_but.onclick = editStudent;
-
+  new_tr.onclick = openInfo;
   for (let i = 0; i < 7; i++) new_tr.append(createElem("td"));
 
   new_tr.children[0].append(elements.input, elements.label);
@@ -162,6 +268,7 @@ function addRow(new_student) {
   new_tr.children[6].append(elements.but_cont);
 
   main_tbody.append(new_tr);
+  checkBox();
 }
 
 function checkValidForm() {
@@ -178,39 +285,53 @@ function checkForm() {
   if (checkValidForm()) {
     const new_student = new Student(
       select_group.value,
-      f_name.value,
-      l_name.value,
+      f_name.value + " " + l_name.value,
       select_gender.value,
       input_date.value,
-      "disabled"
+      "Ofline"
     );
     students.push(new_student);
     addRow(new_student);
+    resetForm();
     changeDisplayFlex(getElement("#wrapper-shadow"));
     changeDisplayFlex(getElement("#addStudent"));
+  } else {
+    alert("Form is invalid");
   }
 }
 
-function delStudent(event) {
-  const clickedElem = event.target;
+function delStudent() {
+  if (all) {
+    students.length = 0;
+    const table = document.querySelector("table");
+    const rows = table.querySelectorAll("tr");
 
-  if (clickedElem.id === "button-del") {
-    const studentId = clickedElem.dataset.studentId;
-    event.stopPropagation();
+    rows.forEach((row, index) => {
+      if (index !== 0) {
+        row.remove();
+      }
+    });
+    getElement("#checkbox1").checked = false;
+  } else {
+    if (clickedElemToDel.id === "button-del") {
+      const studentId = clickedElemToDel.dataset.studentId;
+      event.stopPropagation();
 
-    const rowToDelete = clickedElem.closest("tr");
-    rowToDelete.remove();
+      const rowToDelete = clickedElemToDel.closest("tr");
+      rowToDelete.remove();
 
-    const studentIndex = students.findIndex(
-      (student) => student.id == studentId
-    );
-    if (studentIndex !== -1) {
-      students.splice(studentIndex, 1);
-      console.log(`Student with ID: ${studentId} removed from the list`);
+      const studentIndex = students.findIndex(
+        (student) => student.id == studentId
+      );
+      if (studentIndex !== -1) {
+        students.splice(studentIndex, 1);
+        console.log(`Student with ID: ${studentId} removed from the list`);
+      }
     }
   }
-}
 
+  closeDel();
+}
 
 function editStudent() {
   const clickedElem = event.target;
@@ -225,9 +346,10 @@ function editStudent() {
     );
     if (studentIndex !== -1) {
       student = students[studentIndex];
+      const [firstName, lastName] = student.name.split(" ");
       select_group.value = student.group;
-      f_name.value = student.fname;
-      l_name.value = student.lname;
+      f_name.value = firstName || "";
+      l_name.value = lastName || "";
       select_gender.value = student.gender;
       input_date.value = student.birthday;
 
@@ -246,6 +368,7 @@ function saveForm() {
     student.gender = select_gender.value;
     student.birthday = input_date.value;
     editRow(student);
+    resetForm();
     changeDisplayFlex(getElement("#wrapper-shadow"));
     changeDisplayFlex(getElement("#addStudent"));
     student = null;
@@ -266,5 +389,98 @@ function editRow(student) {
     );
   } else {
     console.log("Student not found");
+  }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  const observer = new MutationObserver(() => {
+    let notif = document.getElementById("sign-not");
+    if (notif) {
+      observer.disconnect();
+      if (localStorage.getItem("notifHidden") === "true") {
+        notif.style.display = "none";
+      }
+    }
+  });
+  observer.observe(document.body, { childList: true, subtree: true });
+});
+
+function hideNotif(event) {
+  let notif = getElement("#sign-not");
+  if (notif) {
+    notif.style.display = "none";
+    localStorage.setItem("notifHidden", "true");
+  }
+}
+
+function bell() {
+  document
+    .getElementById("bell")
+    .animate(
+      [
+        { transform: "rotate(0deg)" },
+        { transform: "rotate(15deg)" },
+        { transform: "rotate(-15deg)" },
+        { transform: "rotate(10deg)" },
+        { transform: "rotate(-10deg)" },
+        { transform: "rotate(0deg)", offset: 0.5 },
+      ],
+      {
+        duration: 1500,
+        iterations: 1,
+      }
+    );
+  localStorage.setItem("notifHidden", "false");
+  let notif = getElement("#sign-not");
+  notif.style.display = "block";
+}
+
+function okClick() {
+  checkValidForm() ? checkForm() : closeAdd();
+}
+
+function burgerMenu() {
+  const burger_menu = getElement("#burger-menu");
+  const aside_elem = getElement("aside");
+  console.log(aside_elem);
+  console.log(burger_menu);
+  changeDisplayBlock(aside_elem);
+}
+
+function closeInfo() {
+  changeDisplayFlex(getElement("#wrapper-shadow"));
+  changeDisplayFlex(getElement("#info-student-wraper"));
+}
+
+function openInfo(event) {
+  console.log(event.target);
+  if (window.innerWidth < 850 && event.target.id != "button-del") {
+    changeDisplayFlex(getElement("#wrapper-shadow"));
+    changeDisplayFlex(getElement("#info-student-wraper"));
+    console.log(event);
+
+    const index = students.findIndex(
+      (student) => student.id == event.currentTarget.dataset.studentId
+    );
+
+    const elements = {
+      group_det: getElement("#group-det"),
+      username_det: getElement("#username-det"),
+      gender_det: getElement("#gender-det"),
+      birthday_det: getElement("#birthday-det"),
+      status_det: getElement("#status-det"),
+    };
+
+    console.log(students[index].group);
+    elements.group_det.innerHTML =
+      `<span class = "info-cap">Group: </span>` + students[index].group;
+    elements.username_det.innerHTML =
+      `<span class = "info-cap">Name: </span>` + students[index].name;
+    elements.gender_det.innerHTML =
+      `<span class = "info-cap">Gender: </span>` + students[index].gender;
+    elements.birthday_det.innerHTML =
+      `<span class = "info-cap">Birthday: </span>` + students[index].birthday;
+    elements.status_det.innerHTML =
+      `<span class = "info-cap">Status: </span>` + students[index].status;
   }
 }

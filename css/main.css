@@ -10,15 +10,20 @@
 
 .main-wrapper {
   display: flex;
+  width: 100%;
+  margin: auto;
+  padding-top: 100px;
+  justify-content: end;
+  padding-right: 100px;
 }
 
 main {
   margin: 60px;
-  width: 70vw;
+  width: 80%;
 }
 
 h2 {
-  margin-bottom: 50px;
+  margin-bottom: 30px;
   font-family: "Monomakh", Arial;
   font-size: 40px;
   color: #bc463a;
@@ -32,7 +37,7 @@ table {
   border-spacing: 0;
   border: 4px solid #5c2019;
   border-radius: 10px;
-  min-height: 220px;
+  min-height: 200px;
 }
 
 th:nth-child(1),
@@ -55,26 +60,27 @@ th:nth-child(5) {
 
 thead {
   width: 100%;
-  height: 100px;
+  height: 80px;
 }
 
 tr {
   width: 100%;
-  height: 100px;
+  height: 80px;
 }
 
 th,
 td {
   border-right: 3px solid #5c2019;
-  border-bottom: 3px solid #5c2019;
+  border-bottom: 4px solid #5c2019;
   border-collapse: collapse;
   font-family: "Monomakh", Arial;
   font-size: 20px;
   color: #bc463a;
-  line-height: 20px;
+  line-height: 30px;
   height: 40px;
   letter-spacing: 2px;
   text-align: center;
+  padding: 0 5px;
 }
 
 th:nth-child(7) {
@@ -90,7 +96,7 @@ td input[type="checkbox"] {
 }
 
 th input[type="checkbox"] + label,
-td input[type="checkbox"] + label{
+td input[type="checkbox"] + label {
   width: 30px;
   height: 30px;
   border: 3px solid #bc463a;
@@ -117,7 +123,14 @@ td input[type="checkbox"]:checked + label::before {
   color: #bc463a;
 }
 
-#button-add {
+#but-table-all {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+#button-add,
+#button-del-all {
   width: 50px;
   height: 50px;
   border: 3px solid #4286f5;
@@ -130,6 +143,19 @@ td input[type="checkbox"]:checked + label::before {
   color: #5c2019;
   align-self: flex-end;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 20px;
+
+  img {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+#button-del-all {
+  display: none;
 }
 
 .wrapper-table {
@@ -142,17 +168,19 @@ td input[type="checkbox"]:checked + label::before {
 #wrapper-shadow {
   width: 100vw;
   height: 100vh;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   background-color: #0000005c;
   z-index: 1;
   display: none;
+  overflow-y: auto;
 }
 
-#addStudent {
-  width: 40%;
-  height: 70%;
+#addStudent,
+#delete-wraper {
+  width: 800px;
+  height: 500px;
   background-color: white;
   position: absolute;
   top: 50%;
@@ -165,7 +193,13 @@ td input[type="checkbox"]:checked + label::before {
   flex-direction: column;
 }
 
-#button-close {
+#delete-wraper {
+  width: 40%;
+  height: 40%;
+  display: none;
+}
+
+.button-close {
   width: 70px;
   height: 70px;
   border-radius: 5px;
@@ -175,7 +209,7 @@ td input[type="checkbox"]:checked + label::before {
   line-height: 43px;
   text-align: center;
   color: #5c2019;
-  align-self: flex-end;
+  /* align-self: flex-end; */
   transform: rotate(45deg);
   position: absolute;
   right: 0;
@@ -185,10 +219,20 @@ td input[type="checkbox"]:checked + label::before {
 h3 {
   margin: 50px 20px 20px;
   font-family: "Monomakh", Arial;
-  font-size: 20px;
+  font-size: 28px;
   color: #bc463a;
   line-height: 20px;
   letter-spacing: 1px;
+}
+
+#war_text {
+  font-family: "Monomakh", Arial;
+  font-size: 30px;
+  text-align: center;
+  margin: auto;
+  width: 90%;
+  min-height: 20%;
+  line-height: 60px;
 }
 
 .line {
@@ -223,30 +267,29 @@ h3 {
 
 .form-item label {
   font-family: "Monomakh", Arial;
-  font-size: 18px;
+  font-size: 22px;
   color: #bc463a;
   line-height: 20px;
   letter-spacing: 1px;
   width: 30%;
 }
 
-.form-item select, 
+.form-item select,
 .form-item input {
-  width: 65%; 
-  height: 30px;
+  width: 65%;
+  height: 35px;
   border: 2px solid #5c2019;
   border-radius: 5px;
   padding-left: 20px;
-  font-size: 14px;
-  color: #5c2019
-  ;
+  font-size: 19px;
+  color: #5c2019;
   line-height: 20px;
   letter-spacing: 1px;
 }
 
-.buttons{
-  width: 20%;
-  height: 50px;
+.buttons {
+  width: 26%;
+  height: 60px;
   align-self: flex-end;
   margin-right: 40px;
   display: flex;
@@ -255,7 +298,9 @@ h3 {
 
 #button-ok,
 #button-create,
-#button-save {
+#button-save,
+#button-cancel,
+#button-ok-del {
   width: 40%;
   height: 50%;
   background-color: transparent;
@@ -263,16 +308,17 @@ h3 {
   border-radius: 5px;
   color: #5c2019;
   text-align: center;
+  font-size: 18px;
 }
 
 #button-create,
-#button-save {
+#button-save,
+#button-cancel {
   width: 50%;
   display: block;
- 
 }
 
-.buttons-table{
+.buttons-table {
   width: 100%;
   display: flex;
   justify-content: space-around;
@@ -280,7 +326,7 @@ h3 {
 }
 
 #button-edit,
-#button-del{
+#button-del {
   width: 45px;
   height: 45px;
   background-color: transparent;
@@ -289,8 +335,12 @@ h3 {
   position: relative;
 }
 
+#button-del {
+  margin-left: 5px;
+}
+
 #button-edit img,
-#button-del img{
+#button-del img {
   width: 30px;
   height: 30px;
   position: absolute;
@@ -298,10 +348,18 @@ h3 {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  display: block;
 }
 
+#button-edit:hover img,
+#button-del:hover img {
+  width: 38px;
+  height: 38px;
+}
 
-.status-circle{
+.status-circle {
   width: 30px;
   height: 30px;
   background-color: darkgray;
@@ -310,7 +368,367 @@ h3 {
 }
 
 #edit_text,
-#add_text{
+#add_text {
   display: block;
 }
 
+td:nth-child(7) {
+  border-right: none;
+}
+
+#info-student-wraper {
+  display: none;
+}
+
+@media screen and (max-width: 1800px) {
+  main {
+    width: 75%;
+  }
+
+  #addStudent,
+  #delete-wraper {
+    width: 600px;
+    height: 450px;
+  }
+
+  #delete-wraper{
+    height: 300px;
+  }
+  #war_text {
+    font-size: 20px;
+    line-height: 30px;
+  }
+
+  h3 {
+    font-size: 20px;
+  }
+
+  .form-item label {
+    font-size: 18px;
+  }
+
+  .form-item select,
+  .form-item input {
+    height: 30px;
+    font-size: 14px;
+  }
+
+  .buttons {
+    width: 20%;
+    height: 50px;
+  }
+  #button-ok,
+  #button-create,
+  #button-save,
+  #button-cancel,
+  #button-ok-del {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 1500px) {
+  .main-wrapper {
+    padding-right: 50px;
+  }
+  main {
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 1250px) {
+  .main-wrapper {
+    padding-right: 100px;
+  }
+
+  #addStudent,
+  #delete-wraper {
+    height: 400px;
+  }
+
+
+  #delete-wraper{
+    height: 300px;
+  }
+  
+  main {
+    width: 85%;
+  }
+
+  td {
+    font-size: 18px;
+    letter-spacing: 1px;
+  }
+
+  #button-edit,
+  #button-del {
+    width: 40px;
+    height: 40px;
+  }
+
+  #button-edit img,
+  #button-del img {
+    width: 25px;
+    height: 25px;
+  }
+
+  #button-edit:hover img,
+  #button-del:hover img {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .main-wrapper {
+    padding-right: 50px;
+  }
+  main {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  main {
+    width: 90%;
+    margin: 60px 0 0 20px;
+  }
+
+  #addStudent,
+  #delete-wraper {
+    width: 500px;
+  }
+
+  #info-student-wraper {
+    display: none;
+    width: 400px;
+    height: 400px;
+    background-color: #ffffff;
+    position: absolute;
+    top: 58%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    flex-direction: column;
+    border-radius: 10px;
+    z-index: 6;
+  }
+
+  h4 {
+    font-family: "Monomakh", Arial;
+    font-size: 24px;
+    font-weight: normal;
+    letter-spacing: 1px;
+    color: #5c2019;
+    height: 40px;
+    line-height: 40px;
+    margin: 20px;
+    width: 86%;
+    text-align: start;
+  }
+
+  .info-student-p {
+    font-family: "Monomakh", Arial;
+    font-size: 20px;
+    line-height: 20px;
+    font-weight: normal;
+    letter-spacing: 1px;
+    color: #000;
+    height: 20px;
+    line-height: 40px;
+    margin: 20px;
+    width: 83%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .info-cap {
+    font-size: 24px;
+    color: #5c2019;
+  }
+
+  th:nth-child(4),
+  td:nth-child(4),
+  th:nth-child(6),
+  td:nth-child(6) {
+    display: none;
+  }
+
+  th:nth-child(1) {
+    width: 10%;
+  }
+
+  th:nth-child(2) {
+    width: 10%;
+  }
+
+  th:nth-child(3) {
+    width: 40%;
+  }
+
+  th:nth-child(5) {
+    width: 20%;
+  }
+
+  th:nth-child(7) {
+    width: 20%;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  th:nth-child(2),
+  td:nth-child(2) {
+    display: none;
+  }
+
+  #addStudent,
+  #delete-wraper {
+    width: 400px;
+  }
+
+  h3 {
+    font-size: 18px;
+  }
+
+  .form-item label {
+    font-size: 16px;
+    width: 35%;
+  }
+
+  .form-item select,
+  .form-item input {
+    height: 30px;
+    font-size: 14px;
+    width: 60%;
+  }
+
+  .buttons {
+    width: 30%;
+    height: 50px;
+  }
+
+  #button-ok,
+  #button-create,
+  #button-save,
+  #button-cancel,
+  #button-ok-del {
+    font-size: 14px;
+  }
+
+  .button-close {
+    font-size: 40px;
+  }
+
+  #info-student-wraper {
+    width: 350px;
+    height: 300px;
+  }
+
+  h4 {
+    font-size: 18px;
+    height: 30px;
+  }
+
+  .info-student-p {
+    font-size: 14px;
+    margin: 10px 20px;
+  }
+
+  .info-cap {
+    font-size: 16px;
+  }
+  th:nth-child(1) {
+    width: 10%;
+  }
+
+  th:nth-child(3) {
+    width: 40%;
+  }
+
+  th:nth-child(5) {
+    width: 20%;
+  }
+
+  th:nth-child(7) {
+    width: 20%;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  th:nth-child(5),
+  td:nth-child(5) {
+    display: none;
+  }
+
+  th:nth-child(1) {
+    width: 20%;
+  }
+
+  th:nth-child(3) {
+    width: 50%;
+  }
+  th:nth-child(7) {
+    width: 30%;
+  }
+
+  #addStudent,
+  #delete-wraper {
+    top: 63%;
+  }
+
+  th,
+  td {
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  #addStudent,
+  #delete-wraper {
+    width: 350px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  #info-student-wraper {
+    width: 300px;
+    height: 300px;
+  }
+
+  #addStudent,
+  #delete-wraper {
+    width: 300px;
+  }
+
+  h3 {
+    font-size: 16px;
+  }
+
+  .form-item label {
+    font-size: 14px;
+    width: 38%;
+    line-height: 30px;
+  }
+
+  .form-item select,
+  .form-item input {
+    height: 30px;
+    font-size: 14px;
+    width: 60%;
+  }
+
+  .button-close {
+    font-size: 35px;
+  }
+  h4 {
+    font-size: 17px;
+    height: 30px;
+  }
+
+  .info-student-p {
+    font-size: 14px;
+    margin: 10px 20px;
+  }
+
+  .info-cap {
+    font-size: 16px;
+  }
+}
