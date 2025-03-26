@@ -1,8 +1,8 @@
 @font-face {
-  font-family: 'Monomakh'; 
-  src: url('../fonts/Monomakh-Regular.ttf') format('truetype');
-  font-weight: normal; 
-  font-style: normal; 
+  font-family: "Monomakh";
+  src: url("../fonts/Monomakh-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }
 
 * {
@@ -31,8 +31,6 @@
   text-align: center;
 }
 
-
-
 .main-wrapper {
   display: flex;
   width: 100%;
@@ -48,13 +46,11 @@ main {
 h2 {
   margin-bottom: 30px;
   font-size: 40px;
-  text-align: left !important; 
+  text-align: left !important;
   color: #bc463a;
   line-height: 20px;
   letter-spacing: 2px;
 }
-
-
 
 #but-table-all {
   width: 100%;
@@ -103,7 +99,7 @@ h2 {
   top: 0;
   left: 0;
   background-color: #0000005c;
-  z-index: 1;
+  z-index: 4;
   display: none;
   overflow-y: auto;
 }
@@ -192,6 +188,7 @@ h3 {
   width: 100%;
   display: flex;
   flex-direction: row;
+  position: relative;
   justify-content: space-between;
 }
 
@@ -226,10 +223,6 @@ h3 {
   justify-content: space-between;
 }
 
-
-
-
-
 .buttons-func-small {
   width: 40%;
   height: 50%;
@@ -248,14 +241,10 @@ h3 {
   display: block;
 }
 
-
-
 #edit_text,
 #add_text {
   display: block;
 }
-
-
 
 #info-student-wraper {
   display: none;
@@ -266,16 +255,14 @@ h3 {
   margin: auto;
   width: 100%;
   margin-top: 30px;
-  justify-content: center
+  justify-content: center;
 }
-
-
 
 .pagination a {
   color: black;
   padding: 8px 16px;
   text-decoration: none;
-  transition: background-color .3s;
+  transition: background-color 0.3s;
   border: 2px solid #5c2019;
   color: #5c2019;
   font-size: 18px;
@@ -289,9 +276,9 @@ h3 {
   border: 2px solid #4286f5;
 }
 
-.pagination a:hover:not(.active) {background-color: #ddd;}
-
-
+.pagination a:hover:not(.active) {
+  background-color: #ddd;
+}
 
 @media screen and (max-width: 1800px) {
   main {
@@ -304,7 +291,7 @@ h3 {
     height: 450px;
   }
 
-  #delete-wraper{
+  #delete-wraper {
     height: 300px;
   }
   #war_text {
@@ -354,11 +341,10 @@ h3 {
     height: 400px;
   }
 
-
-  #delete-wraper{
+  #delete-wraper {
     height: 300px;
   }
-  
+
   main {
     width: 85%;
   }
@@ -483,9 +469,7 @@ h3 {
 }
 
 @media screen and (max-width: 550px) {
-
 }
-
 
 @media screen and (max-width: 450px) {
   #addStudent,
@@ -495,11 +479,11 @@ h3 {
 }
 
 @media screen and (max-width: 400px) {
-  #info-student-wraper, 
-  #addStudent, 
+  #info-student-wraper,
+  #addStudent,
   #delete-wraper {
-    width: 100%; 
-    max-width: 300px; 
+    width: 100%;
+    max-width: 300px;
   }
   h3 {
     font-size: 16px;
@@ -509,7 +493,7 @@ h3 {
     width: 38%;
     line-height: 30px;
   }
-  .form-item select, 
+  .form-item select,
   .form-item input {
     height: 30px;
     font-size: 14px;
@@ -539,9 +523,24 @@ h3 {
   }
 }
 
-
 @media screen and (max-width: 350px) {
-  .pagination{
+  .pagination {
     width: 110%;
   }
+}
+
+.block-error {
+  width: 65%;
+  position: absolute;
+  height: 30px;
+  border-radius: 10px;
+  color: red;
+  border: 1px solid red;
+  right: 0;
+  top: 29px;
+  z-index: 2;
+  background-color: white;
+  line-height: 30px;
+  text-align: center;
+  display: none;
 }

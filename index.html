@@ -3,10 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="A site to manage and interact with the online student list">
+    <meta
+      name="description"
+      content="A site to manage and interact with the online student list"
+    />
     <title>Students</title>
-    <link rel="stylesheet" href="./css/main.css"  />
-    <link rel="stylesheet" href="./css/table.css">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="./css/main.css" />
+    <link rel="stylesheet" href="./css/table.css" />
   </head>
   <body>
     <div id="header-placeholder"></div>
@@ -16,10 +20,20 @@
         <h2 class="font-Monomakh">Students</h2>
         <div class="wrapper-table">
           <div id="but-table-all">
-            <button id="button-del-all" class="font-Monomakh main-buttons" onclick="delAll()">
+            <button
+              id="button-del-all"
+              class="font-Monomakh main-buttons"
+              onclick="delAll()"
+            >
               <img src="./img/1214428.png" alt="delete" />
             </button>
-            <button id="button-add" class="font-Monomakh main-buttons" onclick="openAdd()">+</button>
+            <button
+              id="button-add"
+              class="font-Monomakh main-buttons"
+              onclick="openAdd()"
+            >
+              +
+            </button>
           </div>
           <table>
             <thead>
@@ -29,7 +43,7 @@
                     onclick="checkTh()"
                     type="checkbox"
                     id="checkbox1"
-                  /><label style="font-size: 0;" for="checkbox1">hi</label>
+                  /><label style="font-size: 0" for="checkbox1">hi</label>
                 </th>
                 <th>Group</th>
                 <th>Name</th>
@@ -59,19 +73,36 @@
         <h3 id="edit_text">Edit student</h3>
         <div class="line"></div>
         <form id="form-add">
-          <fieldset id="fieldset-add" >
-            <legend style="font-size: 0;">hi</legend>
+          <fieldset id="fieldset-add">
+            <legend style="font-size: 0">hi</legend>
             <div class="form-item">
               <label for="input-date">Birthday</label>
-              <input id="input-date" type="date" />
+              <input id="input-date" oninput="checkBirthday()" type="date" />
+              <div class="block-error">Enter birthday in format 04/05/2002</div>
             </div>
             <div class="form-item">
               <label for="fname">First name</label>
-              <input type="text" id="fname" name="fname" />
+              <input
+                type="text"
+                id="fname"
+                oninput="checkName()"
+                name="fname"
+              />
+              <div class="block-error">
+                Enter your name two letters min. Only letters
+              </div>
             </div>
             <div class="form-item">
               <label for="lname">Last name</label>
-              <input type="text" id="lname" name="lname" />
+              <input
+                type="text"
+                id="lname"
+                oninput="checkSurname()"
+                name="lname"
+              />
+              <div class="block-error">
+                Enter your surname two letters min. Only letters
+              </div>
             </div>
             <div class="form-item">
               <label for="select-group">Group</label>
@@ -82,6 +113,7 @@
                 <option value="PZ-23">PZ-23</option>
                 <option value="PZ-24">PZ-24</option>
               </select>
+              <div class="block-error">Choose group</div>
             </div>
             <div class="form-item">
               <label for="select-gender">Gender</label>
@@ -90,16 +122,29 @@
                 <option value="male">Male</option>
                 <option value="female">Female</option>
               </select>
+              <div class="block-error">Choose gender</div>
             </div>
           </fieldset>
         </form>
         <div class="line"></div>
         <div class="buttons">
-          <button id="button-ok" class="buttons-func-small" onclick="okClick()">OK</button>
-          <button id="button-create" class="buttons-func-small" type="submit" onclick="checkForm()">
+          <button id="button-ok" class="buttons-func-small" onclick="okClick()">
+            OK
+          </button>
+          <button
+            id="button-create"
+            class="buttons-func-small"
+            type="submit"
+            onclick="checkForm()"
+          >
             Create
           </button>
-          <button id="button-save" class="buttons-func-small" type="submit" onclick="saveForm()">
+          <button
+            id="button-save"
+            class="buttons-func-small"
+            type="submit"
+            onclick="saveForm()"
+          >
             Save
           </button>
         </div>
@@ -113,8 +158,19 @@
         </p>
         <div class="line"></div>
         <div class="buttons">
-          <button id="button-cancel" class="buttons-func-small" onclick="closeDel()">Cancel</button>
-          <button id="button-ok-del" class="buttons-func-small" type="submit" onclick="delStudent()">
+          <button
+            id="button-cancel"
+            class="buttons-func-small"
+            onclick="closeDel()"
+          >
+            Cancel
+          </button>
+          <button
+            id="button-ok-del"
+            class="buttons-func-small"
+            type="submit"
+            onclick="delStudent()"
+          >
             OK
           </button>
         </div>
@@ -131,6 +187,15 @@
     </div>
     <script src="./js/main.js"></script>
     <script src="./js/components.js"></script>
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker
+          .register("/sw.js")
+          .then(() => console.log("Service Worker registered"))
+          .catch((err) =>
+            console.error("Service Worker registration failed", err)
+          );
+      }
+    </script>
   </body>
- 
 </html>

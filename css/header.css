@@ -217,11 +217,23 @@ h1 {
   }
 }
 
+@media screen and (max-width: 550px) {
+  
+  #drop-profile {
+    width: 252px;
+  }
+}
+
+
 @media screen and (max-width: 460px) {
   .wrapper-header,
   #drop-profile,
   #message-wraper {
     width: 280px;
+  }
+
+  #drop-profile {
+    width: 220px;
   }
   #message-wraper {
     height: 280px;

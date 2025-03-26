@@ -12,7 +12,7 @@ let clickedElemToDel = null;
 let all = false;
 
 class Student {
-  static count = 2;
+  static count = loadStudentsFromLocalStorage().length + 1;
 
   constructor(group, name, gender, birthday, status) {
     this.id = Student.count++;
@@ -24,16 +24,27 @@ class Student {
   }
 }
 
-const students = [];
 let student = null;
-
+let students;
 document.addEventListener("DOMContentLoaded", function () {
   if (
     window.location.pathname.split("/").pop() == "index.html" ||
     window.location.pathname.split("/").pop() == ""
-  )
+  ) {
+    students = loadStudentsFromLocalStorage();
+
     loadPage();
+  }
 });
+
+function saveStudentsToLocalStorage() {
+  localStorage.setItem("students", JSON.stringify(students));
+}
+
+function loadStudentsFromLocalStorage() {
+  const storedStudents = localStorage.getItem("students");
+  return storedStudents ? JSON.parse(storedStudents) : [];
+}
 
 function loadPage() {
   const new_student = new Student(
@@ -43,8 +54,22 @@ function loadPage() {
     "2006-07-07",
     "Online"
   );
-  students.push(new_student);
-  addRow(new_student);
+  const exists = students.some(
+    (s) =>
+      s.group === new_student.group &&
+      s.name === new_student.name &&
+      s.gender === new_student.gender &&
+      s.birthday === new_student.birthday &&
+      s.status === new_student.status
+  );
+
+  if (!exists) {
+    students.push(new_student);
+    saveStudentsToLocalStorage();
+  } else {
+    console.log("Student with this ID already exists in localStorage");
+    addRow(new_student);
+  }
 }
 
 function changeDisplayFlex(elem) {
@@ -107,7 +132,7 @@ function closeDel() {
   changeDisplayFlex(getElement("#wrapper-shadow"));
   changeDisplayFlex(getElement("#delete-wraper"));
   clickedElemToDel = null;
-  if (all) {
+  if (!getElement("#checkbox1").checked) {
     getElement("#button-del-all").style.display = "none";
   }
   all = false;
@@ -118,7 +143,6 @@ function openDelOne() {
   all = false;
   clickedElemToDel = event.target;
   const studentId = clickedElemToDel.dataset.studentId;
-
   const studentIndex = students.findIndex((student) => student.id == studentId);
   if (studentIndex !== -1) {
     getElement(
@@ -138,7 +162,6 @@ function createElem(tag) {
 
 function butAvai(elem) {
   let parentTd = elem.parentElement.parentElement.children[6];
-
   let but_edit = parentTd.querySelector("#button-edit");
   let but_del = parentTd.querySelector("#button-del");
   const buts = [but_del, but_edit];
@@ -156,7 +179,6 @@ function butAvai(elem) {
       });
 
   if (elem.checked) {
-    console.log("hi");
     elem.checked
       ? Array.from(document.querySelectorAll('input[type="checkbox"]'))
           .splice(1)
@@ -201,13 +223,11 @@ function delAll() {
 
 function checkBox() {
   let checkedAll = true;
-
   Array.from(document.querySelectorAll('input[type="checkbox"]'))
     .splice(1)
     .forEach((but) => {
       if (!but.checked) {
         checkedAll = false;
-        console.log(checkedAll);
       }
     });
   if (checkedAll) {
@@ -279,13 +299,96 @@ function addRow(new_student) {
   checkBox();
 }
 
+function checkBirthday() {
+  let date = input_date.value;
+  let block = document.querySelector(".block-error");
+
+  let datePattern =
+    /^(19[1-9]\d|20[0-2]\d|2025)-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
+
+  if (!datePattern.test(date)) {
+    block.style.display = "block";
+    block.textContent = "Invalid date format. Use MM-DD-YYYY.";
+    return false;
+  }
+
+  let [year, month, day] = date.split("-").map(Number);
+  let currentYear = new Date().getFullYear();
+  if (year < currentYear - 80 || year > currentYear - 16) {
+    block.style.display = "block";
+    block.textContent = `Enter the year from [${currentYear - 80}; ${currentYear - 16}]`;
+    return false;
+  }
+
+  let daysInMonth = new Date(year, month, 0).getDate();
+
+  if (day > daysInMonth) {
+    block.style.display = "block";
+    block.textContent = `Enter the day from [01; ${daysInMonth}]`;
+    return false;
+  }
+
+  block.style.display = "none";
+  return true;
+}
+
+function checkName() {
+  let name = f_name.value;
+  const pattern = /^[A-Z]{1}[a-z-]{2,20}(\s*[A-Z]{1}[a-z-]{2,20})?$/;
+  let block = document.querySelectorAll(".block-error")[1];
+  console.log(pattern.test(name));
+  if (!pattern.test(name)) {
+    console.log(block);
+    block.style.display = "block";
+    block.style.textContent = "Enter name that have min 2 letter and only them";
+    return false;
+  } else {
+    block.style.display = "none";
+    return true;
+  }
+}
+
+function checkSurname() {
+  let surname = l_name.value;
+  console.log("hi");
+  const pattern = /^[A-Z]{1}[a-z]{2,20}(\s*[A-Z]{1}[a-z]{2,20})?$/;
+  let block = document.querySelectorAll(".block-error")[2];
+  console.log(pattern.test(surname));
+  if (!pattern.test(surname)) {
+    console.log(block);
+    block.style.display = "block";
+    block.style.textContent =
+      "Enter surname that have min 2 letter and only them";
+    return false;
+  } else {
+    block.style.display = "none";
+    return true;
+  }
+}
+
 function checkValidForm() {
+  let blockGroup = document.querySelectorAll(".block-error")[3];
+  let blockGender = document.querySelectorAll(".block-error")[4];
+  if (select_group.value == "selected") {
+    blockGroup.style.display = "block";
+    return false;
+  } else {
+    blockGroup.style.display = "none";
+  }
+
+  if (select_gender.value == "selected") {
+    blockGender.style.display = "block";
+    return false;
+  } else {
+    blockGender.style.display = "none";
+  }
+
   return (
     select_group.value != "selected" &&
-    f_name.value != "" &&
-    l_name.value != "" &&
+    checkName() &&
+    checkSurname() != "" &&
     select_gender.value != "selected" &&
-    input_date.value != ""
+    checkBirthday()
   );
 }
 
@@ -299,12 +402,11 @@ function checkForm() {
       "Ofline"
     );
     students.push(new_student);
+    saveStudentsToLocalStorage();
     addRow(new_student);
     resetForm();
     changeDisplayFlex(getElement("#wrapper-shadow"));
     changeDisplayFlex(getElement("#addStudent"));
-  } else {
-    alert("Form is invalid");
   }
 }
 
@@ -337,7 +439,7 @@ function delStudent() {
       }
     }
   }
-
+  saveStudentsToLocalStorage();
   closeDel();
 }
 
@@ -400,6 +502,8 @@ function editRow(student) {
       student.gender,
       student.birthday,
     ].forEach((text, i) => (row.children[i + 1].textContent = text));
+    saveStudentsToLocalStorage();
+    console.log(JSON.stringify(students[rowIndex], null, 2));
   } else {
     console.log("Student not found");
   }
